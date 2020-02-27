@@ -36,7 +36,7 @@ class CodeforcesApi:
 
     def generate_url(self, method_name, **fields):
         """
-        Generates request url for api.
+        Generates request URL for API.
         """
         if not self.anonimus:
             current_time = time.time()
@@ -83,7 +83,7 @@ class CodeforcesApi:
 
     def check_return_code(self, response):
         """
-        Checks if returned response is OK.
+        Checks if a returned response is OK.
         If not OK Exception will be raised will additional info.
         """
         if response["status"] != "OK":
@@ -168,17 +168,19 @@ class CodeforcesApi:
     ):
         """
         Get contest.standings for contest, contest_id required.
-        From is replaced with start, because from is reserved python word.
+        From is replaced with a start, because from is reserved python word.
         Count defines how many submits will be returned.
         Handles should be a list of handles to get (max 10000).
-        Room is number of room which is need.
-        Show_unofficial is used for adding or removing non official participants.
+        Room is the number of the room which is needed.
+        Show_unofficial is used for adding or removing not official participants.
         Returns parsed response from codeforces.com.
         """
         if not isinstance(handles, list):
             raise TypeError("Handles should be a list")
         if len(handles) > 10000:
-            raise OverflowError("Max count of handles should be less or equal 10000")
+            raise OverflowError(
+                "Max count of handles should be less or equal to 10000."
+            )
         parameters = {
             "contestId": str(contest_id),
             "showUnofficial": str(show_unofficial),
@@ -200,9 +202,9 @@ class CodeforcesApi:
     def contest_status(self, contest_id, handle="", start=-1, count=-1):
         """
         Get contest.status for contest, contest_id required.
-        From is replaced with start, because from is reserved python word.
+        From is replaced with a start, because from is reserved python word.
         Count defines how many submits will be returned.
-        Handle is used for specifying user.
+        Handle is used for specifying a user.
         Returns parsed response from codeforces.com.
         """
         if contest_id == None:
@@ -224,7 +226,7 @@ class CodeforcesApi:
         """
         Get problemset.problems.
         tags is a list of tags for tasks.
-        problemset_name is a string with additional archive name.
+        problemset_name is a string with an additional archive name.
         For example 'acmsguru'.
         Returns parsed response from codeforces.com.
         """
@@ -245,7 +247,7 @@ class CodeforcesApi:
         """
         Get problemset.recentStatus.
         count is the number of returned submits, up to 1000.
-        problemset_name is a string with additional archive name.
+        problemset_name is a string with an additional archive name.
         For example 'acmsguru'.
         Returns parsed response from codeforces.com.
         """
@@ -294,7 +296,7 @@ class CodeforcesApi:
     def user_friends(self, only_online=False):
         """
         Get user.friends.
-        Auth is required for this method, so create class instance with api_key and secret.
+        Auth is required for this method, so create a class instance with api_key and secret.
         Only_online should be boolean.
         Returns parsed response from codeforces.com.
         """
@@ -311,13 +313,13 @@ class CodeforcesApi:
     def user_info(self, handles):
         """
         Get user.info.
-        Handles should be a list with users, up to 10000.
+        Handles should be a list of users, up to 10000.
         Returns parsed response from codeforces.com.
         """
         if not isinstance(handles, list):
             raise TypeError("Handles should be a list")
         if len(handles) > 10000:
-            raise OverflowError("Max count of handles should be less or equal 10000")
+            raise OverflowError("Max count of handles should be less or equal to 10000")
         request_url = self.generate_url("user.info", **{"handles": handles})
         request = requests.get(request_url)
         response = request.json()
@@ -327,7 +329,7 @@ class CodeforcesApi:
     def user_rated_list(self, active_only=False):
         """
         Get user.ratedList.
-        Active_only is used to sho only users, which participatied last month.
+        Active_only is used to show only users, which participated last month.
         Returns parsed response from codeforces.com.
         """
         request_url = self.generate_url(
@@ -354,8 +356,8 @@ class CodeforcesApi:
         """
         Get user.status.
         Handle is required.
-        From was replaced with start, because from is reserved python word.
-        Count is number of attempts to return.
+        From was replaced with a start because from is reserved python word.
+        Count is the number of attempts to return.
         Returns parsed response from codeforces.com.
         """
         parameters = {
