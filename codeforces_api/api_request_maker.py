@@ -96,3 +96,8 @@ class CodeforcesApiRequestMaker():
         if rando >= 1000000 or rando <= 99999:
             rando = random.randint(100000, 999999)
         self.rand = rando
+
+    def get_response(self, request):
+        response = request.json()
+        self.check_return_code(response)
+        return response
