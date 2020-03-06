@@ -5,34 +5,39 @@ class CodeforcesApiRequestMaker():
 
     api_key = ""
     secret = ""
-    randomKey = 0
+    rand = 0
     anonimus = False
 
-    def __init__(self, api_key=None, secret=None, rand=1000000):
+    def __init__(self, api_key=None, secret=None, rando=1000000):
         """
-        Initializes main variables: api_key, secret, random (default is between 1 and 1000000),
-        but when you set it it will be yours.
+        Initializes main variables: api_key, secret, random (default is between 100000
+        and 1000000 unless specified)
         """
 
-        if rand == 1000000:
-            rand = random.randint(1, 1000000)
+        if rando >= 1000000 or rando <= 99999:
+            rando = random.randint(100000, 999999)
         if api_key is None and secret is None:
             self.anonimus = True
         else:
             self.api_key = api_key
             self.secret = secret
             self.anonimus = False
-        self.randomKey = rand
+        self.rand = rando
 
     def generate_url(self, method_name, **fields):
         """
         Generates request URL for API.
         """
+
         if not self.anonimus:
+
+            #Renew Rand
+            self.renew_rand()
+
             current_time = time.time()
             fields["apiKey"] = str(self.api_key)
             fields["time"] = str(int(current_time))
-            api_signature = str(self.randomKey) + "/" + method_name + "?"
+            api_signature = str(self.rand) + "/" + method_name + "?"
             fields = collections.OrderedDict(sorted(fields.items()))
             for i in fields:
                 api_signature += str(i) + "="
@@ -56,7 +61,7 @@ class CodeforcesApiRequestMaker():
                     request_url += str(fields[i])
                 request_url += "&"
             request_url += (
-                "apiSig=" + str(self.randomKey) + str(hashed_signature.hexdigest())
+                "apiSig=" + str(self.rand) + str(hashed_signature.hexdigest())
             )
         else:
             request_url = "https://codeforces.com/api/" + str(method_name) + "?"
@@ -82,3 +87,12 @@ class CodeforcesApiRequestMaker():
                 response["status"],
                 response["comment"],
             )
+
+    def renew_rand(self, rando=1000000):
+        """
+        It's recommended that you renew your apiSig for each request
+        default is between 100000 and 1000000 unless specified)
+        """
+        if rando >= 1000000 or rando <= 99999:
+            rando = random.randint(100000, 999999)
+        self.rand = rando
