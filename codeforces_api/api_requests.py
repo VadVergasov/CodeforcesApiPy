@@ -1,10 +1,6 @@
 """
 Main class for requests.
 """
-import collections
-import hashlib
-import time
-
 import requests
 
 from api_request_maker import *
