@@ -8,22 +8,22 @@ class CodeforcesApiRequestMaker():
     rand = 0
     anonimus = False
 
-    def __init__(self, api_key=None, secret=None, rando=1000000):
+    def __init__(self, api_key=None, secret=None, random_number=1000000):
         """
         Initializes main variables: api_key, secret, random (default is between 1
         and 1000000 unless specified)
         """
 
-        if rando >= 1000000 : #or rando <= 99999:
-            rando = random.randint(1, 999999)
-            #rando = random.randint(100000, 999999)
+        if random_number >= 1000000 : #or random_number <= 99999:
+            random_number = random.randint(1, 999999)
+            #random_number = random.randint(100000, 999999)
         if api_key is None and secret is None:
             self.anonimus = True
         else:
             self.api_key = api_key
             self.secret = secret
             self.anonimus = False
-        self.rand = rando
+        self.rand = random_number
 
     def generate_url(self, method_name, **fields):
         """
@@ -89,14 +89,14 @@ class CodeforcesApiRequestMaker():
                 response["comment"],
             )
 
-    def renew_rand(self, rando=1000000):
+    def renew_rand(self, random_number=1000000):
         """
         It's recommended that you renew your apiSig for each request
         default is between 100000 and 1000000 unless specified)
         """
-        if rando >= 1000000 : #or rando <= 99999:
-            rando = random.randint(1, 999999)
-            #rando = random.randint(100000, 999999)
+        if random_number >= 1000000 : #or random_number <= 99999:
+            random_number = random.randint(1, 999999)
+            #random_number = random.randint(100000, 999999)
 
     def get_response(self, request):
         response = request.json()
