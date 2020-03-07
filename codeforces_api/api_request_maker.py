@@ -10,12 +10,13 @@ class CodeforcesApiRequestMaker():
 
     def __init__(self, api_key=None, secret=None, rando=1000000):
         """
-        Initializes main variables: api_key, secret, random (default is between 100000
+        Initializes main variables: api_key, secret, random (default is between 1
         and 1000000 unless specified)
         """
 
-        if rando >= 1000000 or rando <= 99999:
-            rando = random.randint(100000, 999999)
+        if rando >= 1000000 : #or rando <= 99999:
+            rando = random.randint(1, 999999)
+            #rando = random.randint(100000, 999999)
         if api_key is None and secret is None:
             self.anonimus = True
         else:
@@ -93,9 +94,9 @@ class CodeforcesApiRequestMaker():
         It's recommended that you renew your apiSig for each request
         default is between 100000 and 1000000 unless specified)
         """
-        if rando >= 1000000 or rando <= 99999:
-            rando = random.randint(100000, 999999)
-        self.rand = rando
+        if rando >= 1000000 : #or rando <= 99999:
+            rando = random.randint(1, 999999)
+            #rando = random.randint(100000, 999999)
 
     def get_response(self, request):
         response = request.json()
