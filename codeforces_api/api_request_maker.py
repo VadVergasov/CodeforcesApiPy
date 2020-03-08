@@ -1,10 +1,10 @@
-
 import random
 import time
 import hashlib
 import collections
 
-class CodeforcesApiRequestMaker():
+
+class CodeforcesApiRequestMaker:
 
     api_key = ""
     secret = ""
@@ -18,13 +18,13 @@ class CodeforcesApiRequestMaker():
         and 1000000 unless specified)
         """
 
-        if random_number == 1000000 : 
+        if random_number == 1000000:
             random_number = random.randint(100000, 999999)
             self.assigned_rand = True
         elif random_number < 100000 and random_number > 999999:
             raise Exception(
                 "Non 6-digit number passed as random_number for API Signature",
-                random_number
+                random_number,
             )
         if api_key is None and secret is None:
             self.anonimus = True
@@ -41,7 +41,7 @@ class CodeforcesApiRequestMaker():
 
         if not self.anonimus:
 
-            #Renew Rand
+            # Renew Rand
             if not self.assigned_rand:
                 self.renew_rand()
 
@@ -104,12 +104,12 @@ class CodeforcesApiRequestMaker():
         It's recommended that you renew your apiSig for each request
         default is between 100000 and 1000000 unless specified)
         """
-        if random_number == 1000000 : 
+        if random_number == 1000000:
             random_number = random.randint(100000, 999999)
         elif random_number < 100000 and random_number > 999999:
             raise Exception(
                 "Non 6-digit number passed as random_number for renew_rand",
-                random_number
+                random_number,
             )
 
     def get_response(self, request):
