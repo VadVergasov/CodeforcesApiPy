@@ -1,6 +1,6 @@
 dist/
 build/
 CodeforcesApiPy.egg-info
-tests/
+tests/conf.py
 .pylintrc
 codeforces_api/__pycache__/

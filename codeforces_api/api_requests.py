@@ -13,7 +13,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
     def blog_entry_comments(self, blog_entry_id):
         """
-        Get blogEntry.commnets for blog, blog_entry_id required.
+        Get blogEntry.commnets for blog , blog_entry_id required.
         Returns parsed response from codeforces.com.
         """
         request = requests.get(
