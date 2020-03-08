@@ -1,97 +1,14 @@
 """
 Main class for requests.
 """
-import collections
-import hashlib
-import random
-import time
-
 import requests
 
+from api_request_maker import *
 
-class CodeforcesApi:
+class CodeforcesApi(CodeforcesApiRequestMaker):
     """
     Class for using official API requests.
     """
-
-    api_key = ""
-    secret = ""
-    random = 0
-    anonimus = False
-
-    def __init__(self, api_key=None, secret=None, rand=1000000):
-        """
-        Initializes main variables: api_key, secret, random (default is between 1 and 1000000),
-        but when you set it it will be yours.
-        """
-        if rand == 1000000:
-            rand = random.randint(1, 1000000)
-        if api_key is None and secret is None:
-            self.anonimus = True
-        else:
-            self.api_key = api_key
-            self.secret = secret
-            self.anonimus = False
-        self.random = rand
-
-    def generate_url(self, method_name, **fields):
-        """
-        Generates request URL for API.
-        """
-        if not self.anonimus:
-            current_time = time.time()
-            fields["apiKey"] = str(self.api_key)
-            fields["time"] = str(int(current_time))
-            api_signature = str(self.random) + "/" + method_name + "?"
-            fields = collections.OrderedDict(sorted(fields.items()))
-            for i in fields:
-                api_signature += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        api_signature += str(j) + ";"
-                else:
-                    api_signature += str(fields[i])
-                api_signature += "&"
-            api_signature = api_signature[:-1]
-            api_signature += "#" + str(self.secret)
-            hashed_signature = hashlib.sha512(api_signature.encode("utf-8"))
-
-            request_url = "https://codeforces.com/api/" + str(method_name) + "?"
-            for i in fields:
-                request_url += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        request_url += str(j) + ";"
-                else:
-                    request_url += str(fields[i])
-                request_url += "&"
-            request_url += (
-                "apiSig=" + str(self.random) + str(hashed_signature.hexdigest())
-            )
-        else:
-            request_url = "https://codeforces.com/api/" + str(method_name) + "?"
-            for i in fields:
-                request_url += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        request_url += str(j) + ";"
-                else:
-                    request_url += str(fields[i])
-                request_url += "&"
-            request_url = request_url[:-1]
-        return request_url
-
-    def check_return_code(self, response):
-        """
-        Checks if a returned response is OK.
-        If not OK Exception will be raised will additional info.
-        """
-        if response["status"] != "OK":
-            raise Exception(
-                "Request returned not OK status",
-                response["status"],
-                response["comment"],
-            )
 
     def blog_entry_comments(self, blog_entry_id):
         """
@@ -103,9 +20,7 @@ class CodeforcesApi:
                 "blogEntry.comments", **{"blogEntryId": str(blog_entry_id)}
             )
         )
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def blog_entry_view(self, blog_entry_id):
         """
@@ -116,9 +31,7 @@ class CodeforcesApi:
             "blogEntry.view", **{"blogEntryId": str(blog_entry_id)}
         )
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def contest_hacks(self, contest_id):
         """
@@ -129,9 +42,7 @@ class CodeforcesApi:
             "contest.hacks", **{"contestId": str(contest_id)}
         )
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def contest_list(self, gym=False):
         """
@@ -140,9 +51,7 @@ class CodeforcesApi:
         """
         request_url = self.generate_url("contest.list", **{"gym": str(gym)})
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def contest_rating_changes(self, contest_id):
         """
@@ -153,9 +62,7 @@ class CodeforcesApi:
             "contest.ratingChanges", **{"contestId": str(contest_id)}
         )
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def contest_standings(
         self,
@@ -195,9 +102,7 @@ class CodeforcesApi:
             parameters["room"] = str(room)
         request_url = self.generate_url("contest.standings", **parameters)
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def contest_status(self, contest_id, handle="", start=-1, count=-1):
         """
@@ -218,9 +123,7 @@ class CodeforcesApi:
             parameters["count"] = str(count)
         request_url = self.generate_url("contest.status", **parameters)
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def problemset_problems(self, tags=[""], problemset_name=""):
         """
@@ -239,9 +142,7 @@ class CodeforcesApi:
             parameters["problemsetName"] = problemset_name
         request_url = self.generate_url("problemset.problems", **parameters)
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def problemset_recent_status(self, count, problemset_name=""):
         """
@@ -260,9 +161,7 @@ class CodeforcesApi:
             parameters["problemsetName"] = problemset_name
         request_url = self.generate_url("problemset.recentStatus", **parameters)
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def recent_actions(self, max_count=100):
         """
@@ -275,9 +174,7 @@ class CodeforcesApi:
             raise OverflowError("Max_count should be less or equal to 1000")
         request_url = self.generate_url("recentActions", **{"maxCount": str(max_count)})
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def user_blog_entries(self, handle):
         """
@@ -289,9 +186,7 @@ class CodeforcesApi:
             raise TypeError("Handle should not be empty")
         request_url = self.generate_url("user.blogEntries", **{"handle": str(handle)})
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def user_friends(self, only_online=False):
         """
@@ -306,9 +201,7 @@ class CodeforcesApi:
             "user.friends", **{"onlyOnline": str(only_online)}
         )
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def user_info(self, handles):
         """
@@ -322,9 +215,7 @@ class CodeforcesApi:
             raise OverflowError("Max count of handles should be less or equal to 10000")
         request_url = self.generate_url("user.info", **{"handles": handles})
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def user_rated_list(self, active_only=False):
         """
@@ -336,9 +227,7 @@ class CodeforcesApi:
             "user.ratedList", **{"activeOnly": str(active_only)}
         )
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def user_rating(self, handle):
         """
@@ -348,9 +237,7 @@ class CodeforcesApi:
         """
         request_url = self.generate_url("user.rating", **{"handle": str(handle)})
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        return self.get_response(request)
 
     def user_status(self, handle, start=-1, count=-1):
         """
@@ -369,7 +256,4 @@ class CodeforcesApi:
             parameters["count"] = str(count)
         request_url = self.generate_url("user.status", **parameters)
         request = requests.get(request_url)
-        response = request.json()
-        self.check_return_code(response)
-        return response
-
+        return self.get_response(request)
