@@ -3,7 +3,8 @@ Main class for requests.
 """
 import requests
 
-from api_request_maker import *
+from codeforces_api.api_request_maker import CodeforcesApiRequestMaker
+
 
 class CodeforcesApi(CodeforcesApiRequestMaker):
     """
