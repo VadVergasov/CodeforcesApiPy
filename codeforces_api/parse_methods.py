@@ -18,4 +18,6 @@ class CodeforcesParser:
         )
         tree2 = html.fromstring(solutionPage.text)
         code = tree2.xpath('//*[@id="pageContent"]/div[3]/pre/text()')
+        if len(code) == 0:
+            raise ValueError("Incorrect contest_id or sumbit_id")
         return code[0].replace("\r", "")
