@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="CodeforcesApiPy",
-    version="1.2.0",
+    version="1.2.1",
     description="Implementation of codeforces.com API",
     platforms="any",
     url="https://github.com/VadVergasov/CodeforcesApiPy",
