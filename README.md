@@ -10,7 +10,7 @@ With pip:
 pip install CodeforcesApiPy
 ```
 
-From repository:
+From the repository:
 
 ```bash
 git clone https://github.com/VadVergasov/CodeforcesApiPy.git
@@ -29,3 +29,10 @@ anonim_cf_api = codeforces_api.CodeforcesApi() #Unauthorized access.
 
 parser = codeforces_api.CodeforcesParser() #Parse some info.
 ```
+
+Examples
+---------
+
+Here are some examples of using this library:
+
+* [A2OJ](https://github.com/subodhk01/a2oj) by subodhk01 - allows you to look at your ladder progress.
