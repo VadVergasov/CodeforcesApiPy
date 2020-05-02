@@ -2,6 +2,7 @@ import random
 import time
 import hashlib
 import collections
+import json
 
 
 class CodeforcesApiRequestMaker:
@@ -113,6 +114,9 @@ class CodeforcesApiRequestMaker:
             )
 
     def get_response(self, request):
-        response = request.json()
-        self.check_return_code(response)
-        return response
+        try:
+            response = request.json()
+            self.check_return_code(response)
+            return response
+        except json.decoder.JSONDecodeError as error:
+            raise ValueError("A lot of users, try ")

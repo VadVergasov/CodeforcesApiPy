@@ -78,7 +78,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         Get contest.standings for contest, contest_id required.
         From is replaced with a start, because from is reserved python word.
         Count defines how many submits will be returned.
-        Handles should be a list of handles to get (max 10000).
+        Handles should be a list of handles to get (max 10000) but it is recommended to use less then 500, because http request length is set to 8000.
         Room is the number of the room which is needed.
         Show_unofficial is used for adding or removing not official participants.
         Returns parsed response from codeforces.com.
@@ -207,7 +207,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_info(self, handles):
         """
         Get user.info.
-        Handles should be a list of users, up to 10000.
+        Handles should be a list of users, up to 10000 but it is recommended to use less then 500, because http request length is set to 8000.
         Returns parsed response from codeforces.com.
         """
         if not isinstance(handles, list):

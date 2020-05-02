@@ -2,8 +2,8 @@
 Testing module work.
 """
 
-import conf
 import codeforces_api
+import conf
 
 MAIN = codeforces_api.CodeforcesApi(conf.API_KEY, conf.API_SECRET)
 
@@ -27,4 +27,3 @@ USER_RATING = MAIN.user_rating("VadVergasov")
 USER_STATUS = MAIN.user_status("VadVergasov")
 
 SOLUTION = PARSER.get_solution(1322, 72628149)
-
