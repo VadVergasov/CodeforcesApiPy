@@ -119,4 +119,4 @@ class CodeforcesApiRequestMaker:
             self.check_return_code(response)
             return response
         except json.decoder.JSONDecodeError as error:
-            raise ValueError("A lot of users, try ")
+            raise ValueError("A lot of users, try to reduce number of users in list")
