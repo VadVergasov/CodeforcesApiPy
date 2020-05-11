@@ -14,6 +14,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def blog_entry_comments(self, blog_entry_id):
         """
         Get blogEntry.commnets for blog , blog_entry_id required.
+
         Returns parsed response from codeforces.com.
         """
         request = requests.get(
@@ -26,6 +27,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def blog_entry_view(self, blog_entry_id):
         """
         Get blogEntry.view for blog, blog_entry_id required.
+
         Returns parsed response from codeforces.com.
         """
         request_url = self.generate_url(
@@ -37,6 +39,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def contest_hacks(self, contest_id):
         """
         Get contest.hacks for contest, contest_id required.
+
         Returns parsed response from codeforces.com.
         """
         request_url = self.generate_url(
@@ -48,6 +51,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def contest_list(self, gym=False):
         """
         Get all contests, you can get all gym by gym parameter.
+
         Returns parsed response from codeforces.com
         """
         request_url = self.generate_url("contest.list", **{"gym": str(gym)})
@@ -57,6 +61,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def contest_rating_changes(self, contest_id):
         """
         Get contest.ratingChanges for contest, contest_id required.
+
         Returns parsed response from codeforces.com.
         """
         request_url = self.generate_url(
@@ -76,11 +81,17 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     ):
         """
         Get contest.standings for contest, contest_id required.
+
         From is replaced with a start, because from is reserved python word.
+
         Count defines how many submits will be returned.
+
         Handles should be a list of handles to get (max 10000) but it is recommended to use less then 500, because http request length is set to 8000.
+
         Room is the number of the room which is needed.
+
         Show_unofficial is used for adding or removing not official participants.
+
         Returns parsed response from codeforces.com.
         """
         if not isinstance(handles, list):
@@ -108,9 +119,13 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def contest_status(self, contest_id, handle="", start=-1, count=-1):
         """
         Get contest.status for contest, contest_id required.
+
         From is replaced with a start, because from is reserved python word.
+
         Count defines how many submits will be returned.
+
         Handle is used for specifying a user.
+
         Returns parsed response from codeforces.com.
         """
         if contest_id == None:
@@ -129,9 +144,13 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def problemset_problems(self, tags=[""], problemset_name=""):
         """
         Get problemset.problems.
+
         tags is a list of tags for tasks.
+
         problemset_name is a string with an additional archive name.
+
         For example 'acmsguru'.
+
         Returns parsed response from codeforces.com.
         """
         if not isinstance(tags, list):
@@ -148,9 +167,13 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def problemset_recent_status(self, count, problemset_name=""):
         """
         Get problemset.recentStatus.
+
         count is the number of returned submits, up to 1000.
+
         problemset_name is a string with an additional archive name.
+
         For example 'acmsguru'.
+
         Returns parsed response from codeforces.com.
         """
         if count > 1000:
@@ -167,8 +190,11 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def recent_actions(self, max_count=100):
         """
         Get recentActions.
+
         Max_count is the number of returned actions.
+
         Max_count should be less or equal to 100.
+
         Returns parsed response from codeforces.com.
         """
         if max_count > 100:
@@ -180,7 +206,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_blog_entries(self, handle):
         """
         Get user.blogEntries.
+
         Handle is required.
+
         Returns parsed response from codeforces.com.
         """
         if handle == "":
@@ -192,8 +220,11 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_friends(self, only_online=False):
         """
         Get user.friends.
+
         Auth is required for this method, so create a class instance with api_key and secret.
+
         Only_online should be boolean.
+
         Returns parsed response from codeforces.com.
         """
         if self.anonimus:
@@ -207,7 +238,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_info(self, handles):
         """
         Get user.info.
+
         Handles should be a list of users, up to 10000 but it is recommended to use less then 500, because http request length is set to 8000.
+        
         Returns parsed response from codeforces.com.
         """
         if not isinstance(handles, list):
@@ -221,7 +254,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_rated_list(self, active_only=False):
         """
         Get user.ratedList.
+
         Active_only is used to show only users, which participated last month.
+
         Returns parsed response from codeforces.com.
         """
         request_url = self.generate_url(
@@ -233,7 +268,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_rating(self, handle):
         """
         Get user.rating.
+        
         Handle should be a string.
+
         Returns parsed response from codeforces.com.
         """
         request_url = self.generate_url("user.rating", **{"handle": str(handle)})
@@ -243,9 +280,13 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_status(self, handle, start=-1, count=-1):
         """
         Get user.status.
+
         Handle is required.
+
         From was replaced with a start because from is reserved python word.
+
         Count is the number of attempts to return.
+
         Returns parsed response from codeforces.com.
         """
         parameters = {
