@@ -36,3 +36,4 @@ Examples
 Here are some examples of using this library:
 
 * [A2OJ](https://github.com/subodhk01/a2oj) by subodhk01 - allows you to look at your ladder progress.
+* [cf_utils](https://github.com/xennygrimmato/cf_utils) by xennygrimmato - allows you to find common solved problems.
