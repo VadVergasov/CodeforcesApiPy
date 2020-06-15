@@ -1,4 +1,4 @@
-Usage
+Codeforces API [![License](https://img.shields.io/github/license/VadVergasov/CodeforcesApiPy)](https://github.com/VadVergasov/CodeforcesApiPy/blob/master/README.md) [![Stars](https://img.shields.io/github/stars/VadVergasov/CodeforcesApiPy)](https://github.com/VadVergasov/CodeforcesApiPy/stargazers) [![Forks](https://img.shields.io/github/forks/VadVergasov/CodeforcesApiPy)](https://github.com/VadVergasov/CodeforcesApiPy/network/members) [![Issues](https://img.shields.io/github/issues/VadVergasov/CodeforcesApiPy)](https://github.com/VadVergasov/CodeforcesApiPy/issues)
 ==========
 
 Installing
