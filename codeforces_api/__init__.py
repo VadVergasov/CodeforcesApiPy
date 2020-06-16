@@ -1,5 +1,5 @@
 """
-Importing classes from modules
+Importing all classes from modules
 """
 __all__ = ["CodeforcesApi", "CodeforcesApiRequestMaker", "CodeforcesParser"]
 from codeforces_api.api_requests import CodeforcesApi
