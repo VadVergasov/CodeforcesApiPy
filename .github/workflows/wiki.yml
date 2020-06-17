@@ -1,10 +1,13 @@
 name: Generate wiki
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+    name: Build and publish Wiki
     runs-on: ubuntu-latest
 
     steps:
