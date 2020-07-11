@@ -30,10 +30,10 @@ Using
 ```python
 import codeforces_api
 
-cf_api = codeforces_api.CodeforcesApi(api_key, secret) #Authorized access.
-anonim_cf_api = codeforces_api.CodeforcesApi() #Unauthorized access.
+cf_api = codeforces_api.CodeforcesApi(api_key, secret) #Authorized access to api.
+anonim_cf_api = codeforces_api.CodeforcesApi() #Unauthorized access to api.
 
-parser = codeforces_api.CodeforcesParser() #Parse some info.
+parser = codeforces_api.CodeforcesParser() #Create parser.
 ```
 
 Examples
