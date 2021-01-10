@@ -5,6 +5,7 @@ Codeforces API
 [![Issues](https://img.shields.io/github/issues/VadVergasov/CodeforcesApiPy)](https://github.com/VadVergasov/CodeforcesApiPy/issues)
 [![Publish to PyPI and TestPyPI](https://github.com/VadVergasov/CodeforcesApiPy/workflows/Publish%20to%20PyPI%20and%20TestPyPI/badge.svg?branch=master)](https://pypi.org/project/CodeforcesApiPy/)
 [![Generate wiki](https://github.com/VadVergasov/CodeforcesApiPy/workflows/Generate%20wiki/badge.svg?branch=master)](https://github.com/VadVergasov/CodeforcesApiPy/wiki)
+[![Downloads](https://static.pepy.tech/personalized-badge/codeforcesapipy?period=total&units=international_system&left_color=black&right_color=blue&left_text=Total%20downloads)](https://pepy.tech/project/codeforcesapipy)
 ==========
 
 Installing
