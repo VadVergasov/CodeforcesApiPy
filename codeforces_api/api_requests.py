@@ -293,7 +293,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             "handle": str(handle),
         }
         if start != -1:
-            parameters["start"] = str(start)
+            parameters["from"] = str(start)
         if count != -1:
             parameters["count"] = str(count)
         request_url = self.generate_url("user.status", **parameters)
