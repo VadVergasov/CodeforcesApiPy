@@ -8,6 +8,8 @@ import time
 
 MAIN = codeforces_api.CodeforcesApi(conf.API_KEY, conf.API_SECRET)
 
+ANONIM_API = codeforces_api.CodeforcesApi()
+
 PARSER = codeforces_api.CodeforcesParser()
 
 COMMENTS = MAIN.blog_entry_comments(74185)
@@ -31,5 +33,6 @@ time.sleep(1)
 USER_STATUS = MAIN.user_status("VadVergasov")
 
 SOLUTION = PARSER.get_solution(1322, 72628149)
+TAGS = PARSER.get_tags(1322, "D")
 
 print("No errors found!")

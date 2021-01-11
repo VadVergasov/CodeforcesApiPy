@@ -13,10 +13,11 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
     session = None
 
-    def __init__(self):
+    def __init__(self, api_key=None, secret=None, random_number=1000000):
         """
         Initializing class. All we will need is session to optimize performance.
         """
+        super().__init__(api_key, secret, random_number)
         self.session = requests.Session()
 
     def blog_entry_comments(self, blog_entry_id):
