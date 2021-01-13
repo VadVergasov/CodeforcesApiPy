@@ -1,5 +1,5 @@
 """
-The main class for requests.
+The main class for the API requests.
 """
 import requests
 
@@ -15,14 +15,14 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
     def __init__(self, api_key=None, secret=None, random_number=1000000):
         """
-        Initializing class. All we will need is session to optimize performance.
+        Initializing class. All we will need is a session to optimize performance.
         """
         super().__init__(api_key, secret, random_number)
         self.session = requests.Session()
 
     def blog_entry_comments(self, blog_entry_id):
         """
-        Get blogEntry.commnets for blog , blog_entry_id required.
+        Get blogEntry.commnets for blog, blog_entry_id required.
 
         Returns parsed response from codeforces.com.
         """
@@ -59,7 +59,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
     def contest_list(self, gym=False):
         """
-        Get all contests, you can get all gym by gym parameter.
+        Get all contests you can get all gym by gym parameter.
 
         Returns parsed response from codeforces.com
         """
@@ -69,7 +69,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
     def contest_rating_changes(self, contest_id):
         """
-        Get contest.ratingChanges for contest, contest_id required.
+        Get contest.ratingChanges for the contest, contest_id required.
 
         Returns parsed response from codeforces.com.
         """
@@ -93,13 +93,13 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         From is replaced with a start, because from is reserved python word.
 
-        Count defines how many submits will be returned.
+        count defines how many submits will be returned.
 
         handles should be a list of handles to get (max 10000) but it is recommended to use less than 500 because HTTP request length is set to 8000.
 
-        Room is the number of the room which is needed.
+        room is the number of the room which is needed.
 
-        Show_unofficial is used for adding or removing not official participants.
+        show_unofficial is used for adding or removing not official participants.
 
         Returns parsed response from codeforces.com.
         """
@@ -156,9 +156,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         tags is a list of tags for tasks.
 
-        problemset_name is a string with an additional archive name.
-
-        For example 'acmsguru'.
+        problemset_name is a string with an additional archive name. For example 'acmsguru'.
 
         Returns parsed response from codeforces.com.
         """
@@ -200,9 +198,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         Get recentActions.
 
-        Max_count is the number of returned actions.
+        max_count is the number of returned actions.
 
-        Max_count should be less or equal to 100.
+        max_count should be less or equal to 100.
 
         Returns parsed response from codeforces.com.
         """
@@ -216,7 +214,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         Get user.blogEntries.
 
-        Handle is required.
+        handle is required.
 
         Returns parsed response from codeforces.com.
         """
@@ -232,7 +230,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Auth is required for this method, so create a class instance with api_key and secret.
 
-        Only_online should be boolean.
+        only_online should be boolean.
 
         Returns parsed response from codeforces.com.
         """
@@ -248,7 +246,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         Get user.info.
 
-        Handles should be a list of users, up to 10000 but it is recommended to use less than 500 because HTTP request length is set to 8000.
+        handles should be a list of users, up to 10000 but it is recommended to use less than 500 because HTTP request length is set to 8000.
         
         Returns parsed response from codeforces.com.
         """
@@ -264,7 +262,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         Get user.ratedList.
 
-        Active_only is used to show only users, which participated last month.
+        active_only is used to show only users, which participated last month.
 
         Returns parsed response from codeforces.com.
         """
@@ -278,7 +276,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         Get user.rating.
         
-        Handle should be a string.
+        handle should be a string.
 
         Returns parsed response from codeforces.com.
         """
@@ -290,11 +288,11 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         Get user.status.
 
-        Handle is required.
+        handle is required.
 
         From was replaced with a start because from is reserved python word.
 
-        Count is the number of attempts to return.
+        count is the number of attempts to return.
 
         Returns parsed response from codeforces.com.
         """

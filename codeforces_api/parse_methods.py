@@ -13,7 +13,7 @@ class CodeforcesParser:
 
     def __init__(self):
         """
-        Initializing class. All we will need is session to optimize performance.
+        Initializing class. All we will need is a session to optimize performance.
         """
         self.session = requests.Session()
 
@@ -41,11 +41,11 @@ class CodeforcesParser:
 
     def get_tags(self, contest_id, index):
         """
-        Get tags of given problem.
+        Get tags of the given problem.
 
-        contest_id is number of contest.
+        contest_id is the number of the contest.
 
-        index is number of problem, better to be capital letter. Also could be integer or lowercase letter.
+        index is the number of the problem, better to be a capital letter. Also could be an integer or lowercase letter.
         """
         if self.problem_tags == dict():
             cf_api = CodeforcesApi()

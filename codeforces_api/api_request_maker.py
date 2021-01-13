@@ -1,3 +1,6 @@
+"""
+Class for generating request URLs, which includes working with random, unpacking parameters, calculating hashes.
+"""
 import random
 import time
 import hashlib
@@ -24,7 +27,7 @@ class CodeforcesApiRequestMaker:
             self.assigned_rand = True
         elif random_number < 100000 and random_number > 999999:
             raise Exception(
-                "Non 6-digit number passed as random_number for API Signature",
+                "The non-6-digit number passed as random_number for API Signature",
                 random_number,
             )
         if api_key is None and secret is None:
@@ -110,7 +113,7 @@ class CodeforcesApiRequestMaker:
             random_number = random.randint(100000, 999999)
         elif random_number < 100000 and random_number > 999999:
             raise Exception(
-                "Non 6-digit number passed as random_number for renew_rand",
+                "The non-6-digit number passed as random_number for renew_rand",
                 random_number,
             )
 
@@ -120,4 +123,6 @@ class CodeforcesApiRequestMaker:
             self.check_return_code(response)
             return response
         except json.decoder.JSONDecodeError as error:
-            raise ValueError("A lot of users, try to reduce number of users in list")
+            raise ValueError(
+                "A lot of users, try to reduce the number of users in the list"
+            )
