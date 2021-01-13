@@ -37,6 +37,10 @@ anonim_cf_api = codeforces_api.CodeforcesApi() #Unauthorized access to api.
 parser = codeforces_api.CodeforcesParser() #Create parser.
 ```
 
+Wiki
+--------
+Here is link to the [wiki](https://github.com/VadVergasov/CodeforcesApiPy/wiki) for more details.
+
 Examples
 ---------
 
