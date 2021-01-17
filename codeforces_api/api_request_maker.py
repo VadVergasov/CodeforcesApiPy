@@ -38,10 +38,12 @@ class CodeforcesApiRequestMaker:
             self.anonimus = False
         self.rand = random_number
 
-    def generate_url(self, method_name, **fields):
+    def generate_request(self, method_name, **fields):
         """
         Generates request URL for API.
         """
+
+        request_url = "https://codeforces.com/api/" + str(method_name)
 
         if not self.anonimus:
 
@@ -65,31 +67,8 @@ class CodeforcesApiRequestMaker:
             api_signature = api_signature[:-1]
             api_signature += "#" + str(self.secret)
             hashed_signature = hashlib.sha512(api_signature.encode("utf-8"))
-
-            request_url = "https://codeforces.com/api/" + str(method_name) + "?"
-            for i in fields:
-                request_url += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        request_url += str(j) + ";"
-                else:
-                    request_url += str(fields[i])
-                request_url += "&"
-            request_url += (
-                "apiSig=" + str(self.rand) + str(hashed_signature.hexdigest())
-            )
-        else:
-            request_url = "https://codeforces.com/api/" + str(method_name) + "?"
-            for i in fields:
-                request_url += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        request_url += str(j) + ";"
-                else:
-                    request_url += str(fields[i])
-                request_url += "&"
-            request_url = request_url[:-1]
-        return request_url
+            fields["apiSig"] = str(self.rand) + str(hashed_signature.hexdigest())
+        return {"request_url": request_url, "data": fields}
 
     def check_return_code(self, response):
         """
