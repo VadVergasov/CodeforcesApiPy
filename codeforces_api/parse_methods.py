@@ -13,7 +13,7 @@ class CodeforcesParser:
 
     def __init__(self):
         """
-        Initializing class. All we will need is session to optimize performance.
+        Initializing class. All we will need is a session to optimize performance.
         """
         self.session = requests.Session()
 
@@ -39,13 +39,15 @@ class CodeforcesParser:
             raise ValueError("Incorrect contest_id or submit_id " + str(code))
         return code[0].replace("\r", "")
 
-    def get_tags(self, contest_id, index):
+    def get_tags(self, contest_id, index, include_rating=False):
         """
-        Get tags of given problem.
+        Get tags of the given problem.
 
-        contest_id is number of contest.
+        contest_id is the number of the contest.
 
-        index is number of problem, better to be capital letter. Also could be integer or lowercase letter.
+        index is the number of the problem, better to be a capital letter. Also could be an integer or lowercase letter.
+
+        include_rating is bool which indicates include or not task rating.
         """
         if self.problem_tags == dict():
             cf_api = CodeforcesApi()
@@ -55,10 +57,20 @@ class CodeforcesParser:
                 self.problem_tags[str(problem["contestId"])][
                     str(problem["index"])
                 ] = problem["tags"]
+                if include_rating:
+                    try:
+                        self.problem_tags[str(problem["contestId"])][
+                            str(problem["index"])
+                        ].append("*" + str(problem["rating"]))
+                    except KeyError:
+                        pass
         if isinstance(index, int):
             index = chr(ord("A") + index)
         elif isinstance(index, str):
             if index.isnumeric():
                 index = chr(ord("A") + int(index))
             index = index.capitalize()
-        return self.problem_tags[str(contest_id)][index]
+        try:
+            return self.problem_tags[str(contest_id)][index]
+        except KeyError:
+            return self.problem_tags[str(int(contest_id) - 1)][index]

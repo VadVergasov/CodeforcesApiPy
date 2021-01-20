@@ -1,3 +1,6 @@
+"""
+Class for generating request URLs, which includes working with random, unpacking parameters, calculating hashes.
+"""
 import random
 import time
 import hashlib
@@ -24,7 +27,7 @@ class CodeforcesApiRequestMaker:
             self.assigned_rand = True
         elif random_number < 100000 and random_number > 999999:
             raise Exception(
-                "Non 6-digit number passed as random_number for API Signature",
+                "The non-6-digit number passed as random_number for API Signature",
                 random_number,
             )
         if api_key is None and secret is None:
@@ -35,10 +38,12 @@ class CodeforcesApiRequestMaker:
             self.anonimus = False
         self.rand = random_number
 
-    def generate_url(self, method_name, **fields):
+    def generate_request(self, method_name, **fields):
         """
         Generates request URL for API.
         """
+
+        request_url = "https://codeforces.com/api/" + str(method_name)
 
         if not self.anonimus:
 
@@ -62,31 +67,8 @@ class CodeforcesApiRequestMaker:
             api_signature = api_signature[:-1]
             api_signature += "#" + str(self.secret)
             hashed_signature = hashlib.sha512(api_signature.encode("utf-8"))
-
-            request_url = "https://codeforces.com/api/" + str(method_name) + "?"
-            for i in fields:
-                request_url += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        request_url += str(j) + ";"
-                else:
-                    request_url += str(fields[i])
-                request_url += "&"
-            request_url += (
-                "apiSig=" + str(self.rand) + str(hashed_signature.hexdigest())
-            )
-        else:
-            request_url = "https://codeforces.com/api/" + str(method_name) + "?"
-            for i in fields:
-                request_url += str(i) + "="
-                if isinstance(fields[i], list):
-                    for j in fields[i]:
-                        request_url += str(j) + ";"
-                else:
-                    request_url += str(fields[i])
-                request_url += "&"
-            request_url = request_url[:-1]
-        return request_url
+            fields["apiSig"] = str(self.rand) + str(hashed_signature.hexdigest())
+        return {"request_url": request_url, "data": fields}
 
     def check_return_code(self, response):
         """
@@ -110,7 +92,7 @@ class CodeforcesApiRequestMaker:
             random_number = random.randint(100000, 999999)
         elif random_number < 100000 and random_number > 999999:
             raise Exception(
-                "Non 6-digit number passed as random_number for renew_rand",
+                "The non-6-digit number passed as random_number for renew_rand",
                 random_number,
             )
 
@@ -120,4 +102,6 @@ class CodeforcesApiRequestMaker:
             self.check_return_code(response)
             return response
         except json.decoder.JSONDecodeError as error:
-            raise ValueError("A lot of users, try to reduce number of users in list")
+            raise ValueError(
+                "A lot of users, try to reduce the number of users in the list"
+            )
