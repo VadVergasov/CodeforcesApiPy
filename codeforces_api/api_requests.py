@@ -129,7 +129,11 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         if count != -1:
             parameters["count"] = str(count)
         if handles != [""]:
-            parameters["handles"] = handles
+            handles_str = ""
+            for handle in handles:
+                handles_str += str(handle) + ";"
+            request_data = self.generate_request("user.info", **{"handles": handles_str})
+            parameters["handles"] = handles_str
         if room != -1:
             parameters["room"] = str(room)
         request_data = self.generate_request("contest.standings", **parameters)
@@ -283,7 +287,10 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             raise TypeError("Handles should be a list")
         if len(handles) > 10000:
             raise OverflowError("Max count of handles should be less or equal to 10000")
-        request_data = self.generate_request("user.info", **{"handles": handles})
+        handles_str = ""
+        for handle in handles:
+            handles_str += str(handle) + ";"
+        request_data = self.generate_request("user.info", **{"handles": handles_str})
         request = self.session.post(
             request_data["request_url"], data=request_data["data"]
         )
