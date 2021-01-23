@@ -40,7 +40,7 @@ class CodeforcesApiRequestMaker:
 
     def generate_request(self, method_name, **fields):
         """
-        Generates request URL for API.
+        Generates request URL and data for API.
         """
 
         request_url = "https://codeforces.com/api/" + str(method_name)
@@ -100,7 +100,7 @@ class CodeforcesApiRequestMaker:
         try:
             response = request.json()
             self.check_return_code(response)
-            return response
+            return response["result"]
         except json.decoder.JSONDecodeError as error:
             raise ValueError(
                 "A lot of users, try to reduce the number of users in the list"
