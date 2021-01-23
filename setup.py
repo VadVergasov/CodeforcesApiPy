@@ -21,11 +21,11 @@ setup(
     long_description=open("README.md").read(),
     author="VadVergasov",
     author_email="vadim.vergasov2003@gmail.com",
-    license="MIT",
+    license="GPLv3",
     packages=["codeforces_api"],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
     keywords="codeforces api python",
