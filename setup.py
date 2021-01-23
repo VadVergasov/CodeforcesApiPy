@@ -1,11 +1,19 @@
 """
 Install script for CodeforcesApiPy module
 """
-from setuptools import setup, find_packages
+from setuptools import setup
+import re
+
+with open(
+    "codeforces_api/version.py", "r", encoding="utf-8"
+) as f:  # Credits: LonamiWebs
+    version = re.search(
+        r"^__version__\s*=\s*'(.*)'.*$", f.read(), flags=re.MULTILINE
+    ).group(1)
 
 setup(
     name="CodeforcesApiPy",
-    version="1.5.0",
+    version=version,
     description="Implementation of codeforces.com API",
     platforms="any",
     url="https://github.com/VadVergasov/CodeforcesApiPy",
@@ -14,7 +22,7 @@ setup(
     author="VadVergasov",
     author_email="vadim.vergasov2003@gmail.com",
     license="MIT",
-    packages=find_packages(),
+    packages=["codeforces_api"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
