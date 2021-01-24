@@ -12,13 +12,30 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     """
 
     session = None
+    method = None
 
-    def __init__(self, api_key=None, secret=None, random_number=1000000):
+    def _make_request(self, method, **payload):
+        """
+        Making request to codeforces.com
+
+        Uses different methods (POST or GET) but be aware of 413 error when using GET.
+        """
+        request_data = self.generate_request(method, **payload)
+        request = self.session.request(
+            self.method, request_data["request_url"], data=request_data["data"]
+        )
+        return self.get_response(request)
+
+    def __init__(self, api_key=None, secret=None, random_number=1000000, method="POST"):
         """
         Initializing class. All we will need is a session to optimize performance.
         """
         super().__init__(api_key, secret, random_number)
         self.session = requests.Session()
+        if method == "POST" or method == "GET":
+            self.method = method
+        else:
+            raise ValueError("method should be POST or GET")
 
     def blog_entry_comments(self, blog_entry_id):
         """
@@ -26,13 +43,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        request_data = self.generate_request(
+        return self._make_request(
             "blogEntry.comments", **{"blogEntryId": str(blog_entry_id)}
         )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
 
     def blog_entry_view(self, blog_entry_id):
         """
@@ -40,13 +53,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        request_data = self.generate_request(
+        return self._make_request(
             "blogEntry.view", **{"blogEntryId": str(blog_entry_id)}
         )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
 
     def contest_hacks(self, contest_id):
         """
@@ -54,13 +63,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        request_data = self.generate_request(
-            "contest.hacks", **{"contestId": str(contest_id)}
-        )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("contest.hacks", **{"contestId": str(contest_id)})
 
     def contest_list(self, gym=False):
         """
@@ -68,13 +71,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com
         """
-        request_data = self.generate_request(
-            "contest.list", **{"gym": str(gym).lower()}
-        )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("contest.list", **{"gym": str(gym).lower()})
 
     def contest_rating_changes(self, contest_id):
         """
@@ -82,13 +79,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        request_data = self.generate_request(
+        return self._make_request(
             "contest.ratingChanges", **{"contestId": str(contest_id)}
         )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
 
     def contest_standings(
         self,
@@ -129,14 +122,16 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         if count != -1:
             parameters["count"] = str(count)
         if handles != [""]:
-            parameters["handles"] = handles
+            handles_str = ""
+            for handle in handles:
+                handles_str += str(handle) + ";"
+            request_data = self.generate_request(
+                "user.info", **{"handles": handles_str}
+            )
+            parameters["handles"] = handles_str
         if room != -1:
             parameters["room"] = str(room)
-        request_data = self.generate_request("contest.standings", **parameters)
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("contest.standings", **parameters)
 
     def contest_status(self, contest_id, handle="", start=-1, count=-1):
         """
@@ -159,11 +154,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["start"] = str(start)
         if count != -1:
             parameters["count"] = str(count)
-        request_data = self.generate_request("contest.status", **parameters)
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("contest.status", **parameters)
 
     def problemset_problems(self, tags=[""], problemset_name=""):
         """
@@ -182,11 +173,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["tags"] = tags
         if problemset_name != "":
             parameters["problemsetName"] = problemset_name
-        request_data = self.generate_request("problemset.problems", **parameters)
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("problemset.problems", **parameters)
 
     def problemset_recent_status(self, count, problemset_name=""):
         """
@@ -207,11 +194,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         }
         if problemset_name != "":
             parameters["problemsetName"] = problemset_name
-        request_data = self.generate_request("problemset.recentStatus", **parameters)
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("problemset.recentStatus", **parameters)
 
     def recent_actions(self, max_count=100):
         """
@@ -225,13 +208,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         if max_count > 100:
             raise OverflowError("Max_count should be less or equal to 1000")
-        request_data = self.generate_request(
-            "recentActions", **{"maxCount": str(max_count)}
-        )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("recentActions", **{"maxCount": str(max_count)})
 
     def user_blog_entries(self, handle):
         """
@@ -243,13 +220,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         if handle == "":
             raise TypeError("Handle should not be empty")
-        request_data = self.generate_request(
-            "user.blogEntries", **{"handle": str(handle)}
-        )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("user.blogEntries", **{"handle": str(handle)})
 
     def user_friends(self, only_online=False):
         """
@@ -263,13 +234,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         if self.anonimus:
             raise TypeError("Auth is required.")
-        request_data = self.generate_request(
+        return self._make_request(
             "user.friends", **{"onlyOnline": str(only_online).lower()}
         )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
 
     def user_info(self, handles):
         """
@@ -283,11 +250,10 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             raise TypeError("Handles should be a list")
         if len(handles) > 10000:
             raise OverflowError("Max count of handles should be less or equal to 10000")
-        request_data = self.generate_request("user.info", **{"handles": handles})
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        handles_str = ""
+        for handle in handles:
+            handles_str += str(handle) + ";"
+        return self._make_request("user.info", **{"handles": handles_str})
 
     def user_rated_list(self, active_only=False):
         """
@@ -297,13 +263,9 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        request_data = self.generate_request(
+        return self._make_request(
             "user.ratedList", **{"activeOnly": str(active_only).lower()}
         )
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
 
     def user_rating(self, handle):
         """
@@ -313,11 +275,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        request_data = self.generate_request("user.rating", **{"handle": str(handle)})
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("user.rating", **{"handle": str(handle)})
 
     def user_status(self, handle, start=-1, count=-1):
         """
@@ -338,8 +296,4 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["from"] = str(start)
         if count != -1:
             parameters["count"] = str(count)
-        request_data = self.generate_request("user.status", **parameters)
-        request = self.session.post(
-            request_data["request_url"], data=request_data["data"]
-        )
-        return self.get_response(request)
+        return self._make_request("user.status", **parameters)

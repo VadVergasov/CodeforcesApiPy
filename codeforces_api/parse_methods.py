@@ -51,7 +51,7 @@ class CodeforcesParser:
         """
         if self.problem_tags == dict():
             cf_api = CodeforcesApi()
-            for problem in cf_api.problemset_problems()["result"]["problems"]:
+            for problem in cf_api.problemset_problems()["problems"]:
                 if str(problem["contestId"]) not in self.problem_tags.keys():
                     self.problem_tags[str(problem["contestId"])] = dict()
                 self.problem_tags[str(problem["contestId"])][
