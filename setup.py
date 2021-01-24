@@ -2,18 +2,11 @@
 Install script for CodeforcesApiPy module
 """
 from setuptools import setup
-import re
-
-with open(
-    "codeforces_api/version.py", "r", encoding="utf-8"
-) as f:  # Credits: LonamiWebs
-    version = re.search(
-        r"^__version__\s*=\s*'(.*)'.*$", f.read(), flags=re.MULTILINE
-    ).group(1)
+from codeforces_api.version import __version__
 
 setup(
     name="CodeforcesApiPy",
-    version=version,
+    version=__version__,
     description="Implementation of codeforces.com API",
     platforms="any",
     url="https://github.com/VadVergasov/CodeforcesApiPy",
