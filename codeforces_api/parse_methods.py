@@ -52,16 +52,16 @@ class CodeforcesParser:
         if self.problem_tags == dict():
             cf_api = CodeforcesApi()
             for problem in cf_api.problemset_problems()["problems"]:
-                if str(problem["contestId"]) not in self.problem_tags.keys():
-                    self.problem_tags[str(problem["contestId"])] = dict()
-                self.problem_tags[str(problem["contestId"])][
-                    str(problem["index"])
-                ] = problem["tags"]
+                if str(problem.contest_id) not in self.problem_tags.keys():
+                    self.problem_tags[str(problem.contest_id)] = dict()
+                self.problem_tags[str(problem.contest_id)][
+                    str(problem.index)
+                ] = problem.tags
                 if include_rating:
                     try:
-                        self.problem_tags[str(problem["contestId"])][
-                            str(problem["index"])
-                        ].append("*" + str(problem["rating"]))
+                        self.problem_tags[str(problem.problem_id)][
+                            str(problem.index)
+                        ].append("*" + str(problem.rating))
                     except KeyError:
                         pass
         if isinstance(index, int):
