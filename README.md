@@ -32,14 +32,20 @@ Using
 ```python
 import codeforces_api
 
-cf_api = codeforces_api.CodeforcesApi(api_key, secret) #Authorized access to api.
-anonim_cf_api = codeforces_api.CodeforcesApi() #Unauthorized access to api.
+cf_api = codeforces_api.CodeforcesApi(api_key, secret) # Authorized access to api.
+anonim_cf_api = codeforces_api.CodeforcesApi() # Unauthorized access to api.
 
-parser = codeforces_api.CodeforcesParser() #Create parser.
+parser = codeforces_api.CodeforcesParser() # Create parser.
 ```
+
+Transferring to 2 version
+--------
+
+In the second version, all objects are represented as a class, so if you want to get a handle of the user you need to do like this: user.handle. You can read about all fields on [Codeforces API objects](https://codeforces.com/apiHelp/objects).
 
 Wiki
 --------
+
 Here is link to the [wiki](https://github.com/VadVergasov/CodeforcesApiPy/wiki) for more details.
 
 Examples
