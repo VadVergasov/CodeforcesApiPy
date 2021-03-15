@@ -538,13 +538,13 @@ class Party(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "members": members,
-            "participant_type": participant_type,
-            "ghost": ghost,
-            "team_id": team_id,
-            "contest_id": contest_id,
-            "room": room,
-            "start_time_seconds": start_time_seconds,
+            "members": self.members,
+            "participant_type": self.participant_type,
+            "ghost": self.ghost,
+            "team_id": self.team_id,
+            "contest_id": self.contest_id,
+            "room": self.room,
+            "start_time_seconds": self.start_time_seconds,
         }
 
 
@@ -601,14 +601,14 @@ class Problem(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "index": index,
-            "name": name,
-            "problem_type": problem_type,
-            "contest_id": contest_id,
-            "problemset_name": problemset_name,
-            "points": points,
-            "rating": rating,
-            "tags": tags,
+            "index": self.index,
+            "name": self.name,
+            "problem_type": self.problem_type,
+            "contest_id": self.contest_id,
+            "problemset_name": self.problemset_name,
+            "points": self.points,
+            "rating": self.rating,
+            "tags": self.tags,
         }
 
 
@@ -630,9 +630,9 @@ class ProblemStatistic(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "index": index,
-            "solved_count": solved_count,
-            "contest_id": contest_id,
+            "index": self.index,
+            "solved_count": self.solved_count,
+            "contest_id": self.contest_id,
         }
 
 
@@ -703,19 +703,19 @@ class Submission(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "id": id,
-            "creation_time_seconds": creation_time_seconds,
-            "relative_time_seconds": relative_time_seconds,
-            "problem": problem,
-            "author": author,
-            "programming_language": programming_language,
-            "testset": testset,
-            "passed_test_count": passed_test_count,
-            "time_consumed_millis": time_consumed_millis,
-            "memory_consumed_bytes": memory_consumed_bytes,
-            "contest_id": contest_id,
-            "verdict": verdict,
-            "points": points,
+            "id": self.id,
+            "creation_time_seconds": self.creation_time_seconds,
+            "relative_time_seconds": self.relative_time_seconds,
+            "problem": self.problem,
+            "author": self.author,
+            "programming_language": self.programming_language,
+            "testset": self.testset,
+            "passed_test_count": self.passed_test_count,
+            "time_consumed_millis": self.time_consumed_millis,
+            "memory_consumed_bytes": self.memory_consumed_bytes,
+            "contest_id": self.contest_id,
+            "verdict": self.verdict,
+            "points": self.points,
         }
 
 
@@ -766,14 +766,14 @@ class Hack(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "id": id,
-            "creation_time_seconds": creation_time_seconds,
-            "hacker": hacker,
-            "defender": defender,
-            "problem": problem,
-            "verdict": verdict,
-            "test": test,
-            "judge_protocol": judge_protocol,
+            "id": self.id,
+            "creation_time_seconds": self.creation_time_seconds,
+            "hacker": self.hacker,
+            "defender": self.defender,
+            "problem": self.problem,
+            "verdict": self.verdict,
+            "test": self.test,
+            "judge_protocol": self.judge_protocol,
         }
 
 
@@ -826,14 +826,14 @@ class RanklistRow(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "party": party,
-            "rank": rank,
-            "points": points,
-            "penalty": penalty,
-            "successful_hack_count": successful_hack_count,
-            "unsuccessful_hack_count": unsuccessful_hack_count,
-            "problem_results": problem_results,
-            "last_submission_time_seconds": last_submission_time_seconds,
+            "party": self.party,
+            "rank": self.rank,
+            "points": self.points,
+            "penalty": self.penalty,
+            "successful_hack_count": self.successful_hack_count,
+            "unsuccessful_hack_count": self.unsuccessful_hack_count,
+            "problem_results": self.problem_results,
+            "last_submission_time_seconds": self.last_submission_time_seconds,
         }
 
 
@@ -872,10 +872,9 @@ class ProblemResult(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "points": points,
-            "penalty": penalty,
-            "rejected_attempt_count": rejected_attempt_count,
-            "problem_type": problem_type,
-            "best_submission_time_seconds": best_submission_time_seconds,
+            "points": self.points,
+            "penalty": self.penalty,
+            "rejected_attempt_count": self.rejected_attempt_count,
+            "problem_type": self.problem_type,
+            "best_submission_time_seconds": self.best_submission_time_seconds,
         }
-
