@@ -38,6 +38,16 @@ anonim_cf_api = codeforces_api.CodeforcesApi() # Unauthorized access to api.
 parser = codeforces_api.CodeforcesParser() # Create parser.
 ```
 
+Types
+-------
+
+All types are defined in types.py. They are all completely in line with the [Codeforces API's definition of the types](https://codeforces.com/apiHelp/objects)
+
+Methods
+-------
+
+All [API methods](https://codeforces.com/apiHelp/methods) are located in the CodeforcesAPI class. They are renamed to follow common Python naming conventions. E.g. `contest.hacks` is renamed to `contest_hacks` and `user.actions` to `user_actions`.
+
 Transferring to 2 version
 --------
 
