@@ -1,11 +1,12 @@
 """
 Install script for CodeforcesApiPy module
 """
-from setuptools import setup, find_packages
+from setuptools import setup
+from codeforces_api.version import __version__
 
 setup(
     name="CodeforcesApiPy",
-    version="1.6.0",
+    version=__version__,
     description="Implementation of codeforces.com API",
     platforms="any",
     url="https://github.com/VadVergasov/CodeforcesApiPy",
@@ -13,11 +14,11 @@ setup(
     long_description=open("README.md").read(),
     author="VadVergasov",
     author_email="vadim.vergasov2003@gmail.com",
-    license="MIT",
-    packages=find_packages(),
+    license="GPLv3",
+    packages=["codeforces_api"],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
     keywords="codeforces api python",

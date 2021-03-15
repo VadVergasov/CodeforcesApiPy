@@ -1,9 +1,23 @@
 """
 The main class for the API requests.
+Copyright (C) 2021 Vadim Vergasov
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import requests
 
 from codeforces_api.api_request_maker import CodeforcesApiRequestMaker
+from codeforces_api.types import *
 
 
 class CodeforcesApi(CodeforcesApiRequestMaker):
@@ -43,9 +57,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        return self._make_request(
-            "blogEntry.comments", **{"blogEntryId": str(blog_entry_id)}
-        )
+        return [
+            Comment.de_json(comment)
+            for comment in self._make_request(
+                "blogEntry.comments", **{"blogEntryId": str(blog_entry_id)}
+            )
+        ]
 
     def blog_entry_view(self, blog_entry_id):
         """
@@ -53,8 +70,8 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        return self._make_request(
-            "blogEntry.view", **{"blogEntryId": str(blog_entry_id)}
+        return BlogEntry.de_json(
+            self._make_request("blogEntry.view", **{"blogEntryId": str(blog_entry_id)})
         )
 
     def contest_hacks(self, contest_id):
@@ -63,7 +80,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        return self._make_request("contest.hacks", **{"contestId": str(contest_id)})
+        return [
+            Hack.de_json(hack)
+            for hack in self._make_request(
+                "contest.hacks", **{"contestId": str(contest_id)}
+            )
+        ]
 
     def contest_list(self, gym=False):
         """
@@ -71,7 +93,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com
         """
-        return self._make_request("contest.list", **{"gym": str(gym).lower()})
+        return [
+            Contest.de_json(contest)
+            for contest in self._make_request(
+                "contest.list", **{"gym": str(gym).lower()}
+            )
+        ]
 
     def contest_rating_changes(self, contest_id):
         """
@@ -79,9 +106,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        return self._make_request(
-            "contest.ratingChanges", **{"contestId": str(contest_id)}
-        )
+        return [
+            RatingChange.de_json(rating_change)
+            for rating_change in self._make_request(
+                "contest.ratingChanges", **{"contestId": str(contest_id)}
+            )
+        ]
 
     def contest_standings(
         self,
@@ -131,7 +161,17 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["handles"] = handles_str
         if room != -1:
             parameters["room"] = str(room)
-        return self._make_request("contest.standings", **parameters)
+        response = self._make_request("contest.standings", **parameters)
+        result = {
+            "contest": Contest.de_json(response["contest"]),
+            "problems": [],
+            "rows": [],
+        }
+        for problem in response["problems"]:
+            result["problems"].append(Problem.de_json(problem))
+        for row in response["rows"]:
+            result["rows"].append(RanklistRow.de_json(row))
+        return result
 
     def contest_status(self, contest_id, handle="", start=-1, count=-1):
         """
@@ -154,7 +194,10 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["start"] = str(start)
         if count != -1:
             parameters["count"] = str(count)
-        return self._make_request("contest.status", **parameters)
+        return [
+            Submission.de_json(submission)
+            for submission in self._make_request("contest.status", **parameters)
+        ]
 
     def problemset_problems(self, tags=[""], problemset_name=""):
         """
@@ -173,7 +216,15 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["tags"] = tags
         if problemset_name != "":
             parameters["problemsetName"] = problemset_name
-        return self._make_request("problemset.problems", **parameters)
+        result = {"problems": [], "problem_statistics": []}
+        response = self._make_request("problemset.problems", **parameters)
+        for problem in response["problems"]:
+            result["problems"].append(Problem.de_json(problem))
+        for problem_statistic in response["problemStatistics"]:
+            result["problem_statistics"].append(
+                ProblemStatistic.de_json(problem_statistic)
+            )
+        return result
 
     def problemset_recent_status(self, count, problemset_name=""):
         """
@@ -194,7 +245,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         }
         if problemset_name != "":
             parameters["problemsetName"] = problemset_name
-        return self._make_request("problemset.recentStatus", **parameters)
+        return [
+            Submission.de_json(submission)
+            for submission in self._make_request(
+                "problemset.recentStatus", **parameters
+            )
+        ]
 
     def recent_actions(self, max_count=100):
         """
@@ -208,7 +264,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         if max_count > 100:
             raise OverflowError("Max_count should be less or equal to 1000")
-        return self._make_request("recentActions", **{"maxCount": str(max_count)})
+        return [
+            RecentAction.de_json(recent_action)
+            for recent_action in self._make_request(
+                "recentActions", **{"maxCount": str(max_count)}
+            )
+        ]
 
     def user_blog_entries(self, handle):
         """
@@ -220,7 +281,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         """
         if handle == "":
             raise TypeError("Handle should not be empty")
-        return self._make_request("user.blogEntries", **{"handle": str(handle)})
+        return [
+            BlogEntry.de_json(blog_entry)
+            for blog_entry in self._make_request(
+                "user.blogEntries", **{"handle": str(handle)}
+            )
+        ]
 
     def user_friends(self, only_online=False):
         """
@@ -253,7 +319,10 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         handles_str = ""
         for handle in handles:
             handles_str += str(handle) + ";"
-        return self._make_request("user.info", **{"handles": handles_str})
+        return [
+            User.de_json(user)
+            for user in self._make_request("user.info", **{"handles": handles_str})
+        ]
 
     def user_rated_list(self, active_only=False):
         """
@@ -263,9 +332,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        return self._make_request(
-            "user.ratedList", **{"activeOnly": str(active_only).lower()}
-        )
+        return [
+            User.de_json(user)
+            for user in self._make_request(
+                "user.ratedList", **{"activeOnly": str(active_only).lower()}
+            )
+        ]
 
     def user_rating(self, handle):
         """
@@ -275,7 +347,12 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        return self._make_request("user.rating", **{"handle": str(handle)})
+        return [
+            RatingChange.de_json(rating_change)
+            for rating_change in self._make_request(
+                "user.rating", **{"handle": str(handle)}
+            )
+        ]
 
     def user_status(self, handle, start=-1, count=-1):
         """
@@ -296,4 +373,8 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["from"] = str(start)
         if count != -1:
             parameters["count"] = str(count)
-        return self._make_request("user.status", **parameters)
+        return [
+            Submission.de_json(submission)
+            for submission in self._make_request("user.status", **parameters)
+        ]
+

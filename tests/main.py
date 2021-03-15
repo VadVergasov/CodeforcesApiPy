@@ -2,9 +2,11 @@
 Testing module work.
 """
 
-import codeforces_api
-import conf
 import time
+
+import codeforces_api
+
+import conf
 
 MAIN = codeforces_api.CodeforcesApi(conf.API_KEY, conf.API_SECRET)
 

@@ -1,5 +1,18 @@
 """
 Parse methods from codeforces.com
+Copyright (C) 2021 Vadim Vergasov
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import requests
 from lxml import html
@@ -52,16 +65,16 @@ class CodeforcesParser:
         if self.problem_tags == dict():
             cf_api = CodeforcesApi()
             for problem in cf_api.problemset_problems()["problems"]:
-                if str(problem["contestId"]) not in self.problem_tags.keys():
-                    self.problem_tags[str(problem["contestId"])] = dict()
-                self.problem_tags[str(problem["contestId"])][
-                    str(problem["index"])
-                ] = problem["tags"]
+                if str(problem.contest_id) not in self.problem_tags.keys():
+                    self.problem_tags[str(problem.contest_id)] = dict()
+                self.problem_tags[str(problem.contest_id)][
+                    str(problem.index)
+                ] = problem.tags
                 if include_rating:
                     try:
-                        self.problem_tags[str(problem["contestId"])][
-                            str(problem["index"])
-                        ].append("*" + str(problem["rating"]))
+                        self.problem_tags[str(problem.problem_id)][
+                            str(problem.index)
+                        ].append("*" + str(problem.rating))
                     except KeyError:
                         pass
         if isinstance(index, int):

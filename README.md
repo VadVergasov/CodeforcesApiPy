@@ -6,6 +6,7 @@ Codeforces API
 [![Publish to PyPI and TestPyPI](https://github.com/VadVergasov/CodeforcesApiPy/workflows/Publish%20to%20PyPI%20and%20TestPyPI/badge.svg?branch=master)](https://pypi.org/project/CodeforcesApiPy/)
 [![Generate wiki](https://github.com/VadVergasov/CodeforcesApiPy/workflows/Generate%20wiki/badge.svg?branch=master)](https://github.com/VadVergasov/CodeforcesApiPy/wiki)
 [![Downloads](https://static.pepy.tech/personalized-badge/codeforcesapipy?period=total&units=international_system&left_color=black&right_color=blue&left_text=Total%20downloads)](https://pepy.tech/project/codeforcesapipy)
+![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 ==========
 
 Installing
@@ -31,14 +32,30 @@ Using
 ```python
 import codeforces_api
 
-cf_api = codeforces_api.CodeforcesApi(api_key, secret) #Authorized access to api.
-anonim_cf_api = codeforces_api.CodeforcesApi() #Unauthorized access to api.
+cf_api = codeforces_api.CodeforcesApi(api_key, secret) # Authorized access to api.
+anonim_cf_api = codeforces_api.CodeforcesApi() # Unauthorized access to api.
 
-parser = codeforces_api.CodeforcesParser() #Create parser.
+parser = codeforces_api.CodeforcesParser() # Create parser.
 ```
+
+Types
+-------
+
+All types are defined in types.py. They are all completely in line with the [Codeforces API's definition of the types](https://codeforces.com/apiHelp/objects)
+
+Methods
+-------
+
+All [API methods](https://codeforces.com/apiHelp/methods) are located in the CodeforcesAPI class. They are renamed to follow common Python naming conventions. E.g. `contest.hacks` is renamed to `contest_hacks` and `user.actions` to `user_actions`.
+
+Transferring to 2 version
+--------
+
+In the second version, all objects are represented as a class, so if you want to get a handle of the user you need to do like this: user.handle. You can read about all fields on [Codeforces API objects](https://codeforces.com/apiHelp/objects).
 
 Wiki
 --------
+
 Here is link to the [wiki](https://github.com/VadVergasov/CodeforcesApiPy/wiki) for more details.
 
 Examples
