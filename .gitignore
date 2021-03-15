@@ -11,4 +11,5 @@ tests/*
 !tests/main.py
 !tests/conf.py.template
 !/codeforces_api
+/codeforces_api/
 !/.github
