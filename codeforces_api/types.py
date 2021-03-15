@@ -247,7 +247,7 @@ class BlogEntry(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "id": id,
+            "id": self.id,
             "original_locale": self.original_locale,
             "creation_time_seconds": self.creation_time_seconds,
             "author_handle": self.author_handle,
