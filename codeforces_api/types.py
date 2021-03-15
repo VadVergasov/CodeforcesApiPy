@@ -323,7 +323,7 @@ class RecentAction(JSONDeserializable, Dictionaryable):
         time_seconds = obj["timeSeconds"]
         opts = dict()
         if "blogEntry" in obj:
-            opts["blogEntry"] = BlogEntry.de_json(obj["blogEntry"])
+            opts["blog_entry"] = BlogEntry.de_json(obj["blogEntry"])
         if "comment" in obj:
             opts["comment"] = Comment.de_json(obj["comment"])
         return cls(time_seconds, opts)
@@ -334,7 +334,12 @@ class RecentAction(JSONDeserializable, Dictionaryable):
             setattr(self, key, options[key])
 
     def to_dict(self):
-        return super().to_dict()
+        dictionary = {"time_seconds": self.time_seconds}
+        if "blog_entry" in self.__dict__.keys():
+            dictionary["blog_entry"] = self.blog_entry.to_dict()
+        if "comment" in self.__dict__.keys():
+            dictionary["comment"] = self.blog_entry.to_dict()
+        return dictionary
 
 
 class RatingChange(JSONDeserializable, Dictionaryable):
@@ -538,7 +543,7 @@ class Party(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "members": self.members,
+            "members": [member.to_dict() for member in self.members],
             "participant_type": self.participant_type,
             "ghost": self.ghost,
             "team_id": self.team_id,
@@ -559,6 +564,9 @@ class Member(JSONDeserializable, Dictionaryable):
 
     def __init__(self, handle):
         self.handle = handle
+
+    def to_dict(self):
+        return {"handle": self.handle}
 
 
 class Problem(JSONDeserializable, Dictionaryable):
@@ -706,8 +714,8 @@ class Submission(JSONDeserializable, Dictionaryable):
             "id": self.id,
             "creation_time_seconds": self.creation_time_seconds,
             "relative_time_seconds": self.relative_time_seconds,
-            "problem": self.problem,
-            "author": self.author,
+            "problem": self.problem.to_dict(),
+            "author": self.author.to_dict(),
             "programming_language": self.programming_language,
             "testset": self.testset,
             "passed_test_count": self.passed_test_count,
@@ -768,9 +776,9 @@ class Hack(JSONDeserializable, Dictionaryable):
         return {
             "id": self.id,
             "creation_time_seconds": self.creation_time_seconds,
-            "hacker": self.hacker,
-            "defender": self.defender,
-            "problem": self.problem,
+            "hacker": self.hacker.to_dict(),
+            "defender": self.defender.to_dict(),
+            "problem": self.problem.to_dict(),
             "verdict": self.verdict,
             "test": self.test,
             "judge_protocol": self.judge_protocol,
@@ -826,13 +834,15 @@ class RanklistRow(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "party": self.party,
+            "party": self.party.to_dict(),
             "rank": self.rank,
             "points": self.points,
             "penalty": self.penalty,
             "successful_hack_count": self.successful_hack_count,
             "unsuccessful_hack_count": self.unsuccessful_hack_count,
-            "problem_results": self.problem_results,
+            "problem_results": [
+                problem_result.to_dict() for problem_result in self.problem_results
+            ],
             "last_submission_time_seconds": self.last_submission_time_seconds,
         }
 
