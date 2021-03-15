@@ -17,7 +17,7 @@ jobs:
           python-version: 3.9
       - name: Install twine
         run: >-
-          pip install twine
+          pip install -r requirements.txt
       - name: Build a binary wheel and a source tarball
         run: >-
           python setup.py sdist
