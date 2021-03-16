@@ -1,12 +1,18 @@
 """
 Install script for CodeforcesApiPy module
 """
+import re
+
 from setuptools import setup
-from codeforces_api.version import __version__
+
+with open(
+    "codeforces_api/version.py", "r", encoding="utf-8"
+) as f:
+    version = re.search(r"^__version__\s*=\s*\"(.*)\".*$", f.read(), flags=re.MULTILINE).group(1)
 
 setup(
     name="CodeforcesApiPy",
-    version=__version__,
+    version=version,
     description="Implementation of codeforces.com API",
     platforms="any",
     url="https://github.com/VadVergasov/CodeforcesApiPy",
