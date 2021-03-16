@@ -309,7 +309,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         Get user.info.
 
         handles should be a list of users, up to 10000.
-        
+
         Returns parsed response from codeforces.com.
         """
         if not isinstance(handles, list):
@@ -342,7 +342,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
     def user_rating(self, handle):
         """
         Get user.rating.
-        
+
         handle should be a string.
 
         Returns parsed response from codeforces.com.
@@ -377,4 +377,3 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             Submission.de_json(submission)
             for submission in self._make_request("user.status", **parameters)
         ]
-

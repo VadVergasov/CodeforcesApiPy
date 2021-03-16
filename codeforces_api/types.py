@@ -166,7 +166,7 @@ class User(JSONDeserializable, Dictionaryable):
 
     def to_dict(self):
         return {
-            "hand;e": self.handle,
+            "handle": self.handle,
             "email": self.email,
             "vk_id": self.vk_id,
             "open_id": self.open_id,
@@ -352,7 +352,7 @@ class RatingChange(JSONDeserializable, Dictionaryable):
         contest_name = obj["contestName"]
         handle = obj["handle"]
         rank = obj["rank"]
-        rating_update_time_seconds = ["ratingUpdateTimeSeconds"]
+        rating_update_time_seconds = obj["ratingUpdateTimeSeconds"]
         old_rating = obj["oldRating"]
         new_rating = obj["newRating"]
         return cls(

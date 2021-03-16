@@ -1,4 +1,4 @@
-name: Check code style
+name: Python package
 
 on:
   push:
@@ -11,12 +11,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
-          python-version: "3.9"
+          python-version: ${{ matrix.python-version }}
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -28,7 +31,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Lint with black
+      - name: Test with pytest
         run: |
-          pip install black
-          black .
+          pytest tests/test_api.py --api_key ${{ secrets.codeforces_api_key }} --api_secret ${{ secrets.codeforces_api_secret }}

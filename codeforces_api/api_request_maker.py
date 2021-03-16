@@ -86,7 +86,7 @@ class CodeforcesApiRequestMaker:
     def check_return_code(self, response):
         """
         Checks if a returned response is OK.
-        
+
         If not OK Exception will be raised will additional info.
         """
         if response["status"] != "OK":
