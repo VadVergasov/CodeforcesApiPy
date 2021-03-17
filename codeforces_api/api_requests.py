@@ -17,7 +17,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import requests
 
 from codeforces_api.api_request_maker import CodeforcesApiRequestMaker
-from codeforces_api.types import *
+from codeforces_api.types import (
+    User,
+    BlogEntry,
+    Comment,
+    RecentAction,
+    RatingChange,
+    Contest,
+    Problem,
+    ProblemStatistic,
+    Submission,
+    Hack,
+    RanklistRow,
+)
 
 
 class CodeforcesApi(CodeforcesApiRequestMaker):
