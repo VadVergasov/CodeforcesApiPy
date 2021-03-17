@@ -20,7 +20,7 @@ def test_blog_entry_view(api_key, api_secret):
     assert blog_entry.original_locale == "ru"
     assert blog_entry.id == 74291
     assert blog_entry.title == "<p>Codeforces API python</p>"
-    assert blog_entry.allow_view_history == True
+    assert blog_entry.allow_view_history
     assert blog_entry.tags == [
         "#api",
         "api",
@@ -45,7 +45,7 @@ def test_contest_hacks(api_key, api_secret):
                 "verdict": "Invalid input",
             }
             assert hack.hacker.participant_type == "PRACTICE"
-            assert hack.hacker.ghost == False
+            assert not hack.hacker.ghost
             assert hack.hacker.members[0].handle == "VietCT"
             assert hack.hacker.team_id is None
             assert hack.hacker.contest_id == 1311
@@ -53,7 +53,7 @@ def test_contest_hacks(api_key, api_secret):
             assert hack.hacker.start_time_seconds == 1582554900
             assert hack.defender.members[0].handle == "UMR"
             assert hack.defender.participant_type == "OUT_OF_COMPETITION"
-            assert hack.defender.ghost == False
+            assert not hack.defender.ghost
             assert hack.defender.team_id is None
             assert hack.defender.contest_id == 1311
             assert hack.defender.room is None
@@ -78,7 +78,7 @@ def test_contest_list():
             assert contest.name == "Codeforces Round #706 (Div. 2)"
             assert contest.contest_type == "CF"
             assert contest.phase == "FINISHED"
-            assert contest.frozen == False
+            assert not contest.frozen
             assert contest.duration_seconds == 7200
             assert contest.start_time_seconds == 1615377900
             assert contest.prepared_by is None
@@ -114,7 +114,7 @@ def test_contest_standings(api_key, api_secret):
     assert standings["contest"].name == "Codeforces Round #622 (Div. 2)"
     assert standings["contest"].contest_type == "CF"
     assert standings["contest"].phase == "FINISHED"
-    assert standings["contest"].frozen == False
+    assert not standings["contest"].frozen
     assert standings["contest"].duration_seconds == 7200
     assert standings["contest"].start_time_seconds == 1582448700
     assert standings["contest"].prepared_by is None
@@ -140,7 +140,7 @@ def test_contest_standings(api_key, api_secret):
         if row.party.members[0].handle == "VadVergasov":
             assert row.rank == 2303
             assert row.party.participant_type == "CONTESTANT"
-            assert row.party.ghost == False
+            assert not row.party.ghost
             assert row.party.team_id is None
             assert row.party.contest_id == 1313
             assert row.party.room == 10
@@ -182,7 +182,7 @@ def test_contest_status():
             assert row.problem.tags == ["brute force", "greedy", "implementation"]
             assert row.author.members[0].handle == "VadVergasov"
             assert row.author.participant_type == "CONTESTANT"
-            assert row.author.ghost == False
+            assert not row.author.ghost
             assert row.author.team_id is None
             assert row.author.contest_id == 1313
             assert row.author.room == 10
@@ -252,7 +252,7 @@ def test_user_blog_entries(api_key, api_secret):
             assert entry.original_locale == "ru"
             assert entry.id == 74291
             assert entry.title == "<p>Codeforces API python</p>"
-            assert entry.allow_view_history == True
+            assert entry.allow_view_history
             assert entry.tags == [
                 "#api",
                 "api",
