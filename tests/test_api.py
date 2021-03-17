@@ -210,37 +210,37 @@ def test_problemset_problems(api_key, api_secret):
             assert problem.rating == 1000
             assert problem.tags == ["implementation"]
     for statistic in problemset["problem_statistics"]:
-        assert type(statistic.index) is str
-        assert type(statistic.solved_count) is int
-        assert type(statistic.contest_id) is int
+        assert isinstance(statistic.index, str)
+        assert isinstance(statistic.solved_count, int)
+        assert isinstance(statistic.contest_id, int)
 
 
 def test_recent_status(api_key, api_secret):
     api = CodeforcesApi(api_key, api_secret)
     status = api.problemset_recent_status(1)[0]
-    assert type(status.id) is int
-    assert type(status.creation_time_seconds) is int
-    assert type(status.relative_time_seconds) is int
-    assert type(status.problem) is Problem
-    assert type(status.author) is Party
-    assert type(status.programming_language) is str
-    assert type(status.testset) is str
-    assert type(status.passed_test_count) is int
-    assert type(status.time_consumed_millis) is int
-    assert type(status.memory_consumed_bytes) is int
-    assert type(status.contest_id) is int
-    assert status.verdict is None or type(status.verdict) is str
-    assert status.points is None or type(status.points) is float
+    assert isinstance(status.id, int)
+    assert isinstance(status.creation_time_seconds, int)
+    assert isinstance(status.relative_time_seconds, int)
+    assert isinstance(status.problem, Problem)
+    assert isinstance(status.author, Party)
+    assert isinstance(status.programming_language, str)
+    assert isinstance(status.testset, str)
+    assert isinstance(status.passed_test_count, int)
+    assert isinstance(status.time_consumed_millis, int)
+    assert isinstance(status.memory_consumed_bytes, int)
+    assert isinstance(status.contest_id, int)
+    assert status.verdict is None or isinstance(status.verdict, str)
+    assert status.points is None or isinstance(status.points, float)
 
 
 def test_recent_actions(api_key, api_secret):
     api = CodeforcesApi(api_key, api_secret)
     action = api.recent_actions()[0]
-    assert type(action.time_seconds) is int
+    assert isinstance(action.time_seconds, int)
     if hasattr(action, "blog_entry"):
-        assert type(action.blog_entry) is BlogEntry
+        assert isinstance(action.blog_entry, BlogEntry)
     if hasattr(action, "comment"):
-        assert type(action.comment) is Comment
+        assert isinstance(action.comment, Comment)
 
 
 def test_user_blog_entries(api_key, api_secret):
@@ -274,79 +274,79 @@ def test_user_info(api_key, api_secret):
     api = CodeforcesApi(api_key, api_secret)
     info = api.user_info(["VadVergasov", "tourist"])
     for user in info:
-        assert user.email is None or type(user.email) is str
-        assert user.open_id is None or type(user.open_id) is str
-        assert user.first_name is None or type(user.first_name) is str
-        assert user.last_name is None or type(user.last_name) is str
-        assert user.country is None or type(user.country) is str
-        assert user.vk_id is None or type(user.vk_id) is str
-        assert user.country is None or type(user.country) is str
-        assert user.city is None or type(user.city) is str
-        assert user.organization is None or type(user.organization) is str
-        assert type(user.contribution) is int
-        assert user.rank is None or type(user.rank) is str
-        assert user.rating is None or type(user.rating) is int
-        assert user.max_rank is None or type(user.max_rank) is str
-        assert user.max_rating is None or type(user.max_rating) is int
-        assert type(user.last_online) is int
-        assert type(user.registration_time_seconds) is int
-        assert type(user.friend_of_count) is int
-        assert type(user.avatar) is str
-        assert type(user.title_photo) is str
+        assert user.email is None or isinstance(user.email, str)
+        assert user.open_id is None or isinstance(user.open_id, str)
+        assert user.first_name is None or isinstance(user.first_name, str)
+        assert user.last_name is None or isinstance(user.last_name, str)
+        assert user.country is None or isinstance(user.country, str)
+        assert user.vk_id is None or isinstance(user.vk_id, str)
+        assert user.country is None or isinstance(user.country, str)
+        assert user.city is None or isinstance(user.city, str)
+        assert user.organization is None or isinstance(user.organization, str)
+        assert isinstance(user.contribution, int)
+        assert user.rank is None or isinstance(user.rank, str)
+        assert user.rating is None or isinstance(user.rating, int)
+        assert user.max_rank is None or isinstance(user.max_rank, str)
+        assert user.max_rating is None or isinstance(user.max_rating, int)
+        assert isinstance(user.last_online, int)
+        assert isinstance(user.registration_time_seconds, int)
+        assert isinstance(user.friend_of_count, int)
+        assert isinstance(user.avatar, str)
+        assert isinstance(user.title_photo, str)
 
 
 def test_user_rated_list():
     api = CodeforcesApi()
     users = api.user_rated_list(True)
     for user in users:
-        assert user.email is None or type(user.email) is str
-        assert user.open_id is None or type(user.open_id) is str
-        assert user.first_name is None or type(user.first_name) is str
-        assert user.last_name is None or type(user.last_name) is str
-        assert user.country is None or type(user.country) is str
-        assert user.vk_id is None or type(user.vk_id) is str
-        assert user.country is None or type(user.country) is str
-        assert user.city is None or type(user.city) is str
-        assert user.organization is None or type(user.organization) is str
-        assert type(user.contribution) is int
-        assert user.rank is None or type(user.rank) is str
-        assert user.rating is None or type(user.rating) is int
-        assert user.max_rank is None or type(user.max_rank) is str
-        assert user.max_rating is None or type(user.max_rating) is int
-        assert type(user.last_online) is int
-        assert type(user.registration_time_seconds) is int
-        assert type(user.friend_of_count) is int
-        assert type(user.avatar) is str
-        assert type(user.title_photo) is str
+        assert user.email is None or isinstance(user.email, str)
+        assert user.open_id is None or isinstance(user.open_id, str)
+        assert user.first_name is None or isinstance(user.first_name, str)
+        assert user.last_name is None or isinstance(user.last_name, str)
+        assert user.country is None or isinstance(user.country, str)
+        assert user.vk_id is None or isinstance(user.vk_id, str)
+        assert user.country is None or isinstance(user.country, str)
+        assert user.city is None or isinstance(user.city, str)
+        assert user.organization is None or isinstance(user.organization, str)
+        assert isinstance(user.contribution, int)
+        assert user.rank is None or isinstance(user.rank, str)
+        assert user.rating is None or isinstance(user.rating, int)
+        assert user.max_rank is None or isinstance(user.max_rank, str)
+        assert user.max_rating is None or isinstance(user.max_rating, int)
+        assert isinstance(user.last_online, int)
+        assert isinstance(user.registration_time_seconds, int)
+        assert isinstance(user.friend_of_count, int)
+        assert isinstance(user.avatar, str)
+        assert isinstance(user.title_photo, str)
 
 
 def test_user_rating():
     api = CodeforcesApi()
     ratings = api.user_rating("VadVergasov")
     for rating in ratings:
-        assert type(rating.contest_id) is int
-        assert type(rating.contest_name) is str
-        assert type(rating.handle) is str
-        assert type(rating.rank) is int
-        assert type(rating.rating_update_time_seconds) is int
-        assert type(rating.old_rating) is int
-        assert type(rating.new_rating) is int
+        assert isinstance(rating.contest_id, int)
+        assert isinstance(rating.contest_name, str)
+        assert isinstance(rating.handle, str)
+        assert isinstance(rating.rank, int)
+        assert isinstance(rating.rating_update_time_seconds, int)
+        assert isinstance(rating.old_rating, int)
+        assert isinstance(rating.new_rating, int)
 
 
 def test_user_status():
     api = CodeforcesApi()
     status = api.user_status("VadVergasov")
     for row in status:
-        assert type(row.id) is int
-        assert type(row.creation_time_seconds) is int
-        assert type(row.relative_time_seconds) is int
-        assert type(row.problem) is Problem
-        assert type(row.author) is Party
-        assert type(row.programming_language) is str
-        assert type(row.testset) is str
-        assert type(row.passed_test_count) is int
-        assert type(row.time_consumed_millis) is int
-        assert type(row.memory_consumed_bytes) is int
-        assert row.contest_id is None or type(row.contest_id) is int
-        assert row.verdict is None or type(row.verdict) is str
-        assert row.points is None or type(row.points) is float
+        assert isinstance(row.id, int)
+        assert isinstance(row.creation_time_seconds, int)
+        assert isinstance(row.relative_time_seconds, int)
+        assert isinstance(row.problem, Problem)
+        assert isinstance(row.author, Party)
+        assert isinstance(row.programming_language, str)
+        assert isinstance(row.testset, str)
+        assert isinstance(row.passed_test_count, int)
+        assert isinstance(row.time_consumed_millis, int)
+        assert isinstance(row.memory_consumed_bytes, int)
+        assert row.contest_id is None or isinstance(row.contest_id, int)
+        assert row.verdict is None or isinstance(row.verdict, str)
+        assert row.points is None or isinstance(row.points, float)
