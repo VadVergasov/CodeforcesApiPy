@@ -13,8 +13,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
-"""
-"""
 Source of inspiration: https://github.com/eternnoir/pyTelegramBotAPI/blob/master/telebot/types.py
 """
 import json
@@ -60,10 +58,9 @@ class JSONDeserializable(object):
         """
         if isinstance(json_type, dict):
             return json_type
-        elif isinstance(json_type, str):
+        if isinstance(json_type, str):
             return json.loads(json_type)
-        else:
-            raise ValueError("json_type should be a json dict or string.")
+        raise ValueError("json_type should be a json dict or string.")
 
     def __str__(self):
         d = {}
@@ -194,7 +191,7 @@ class BlogEntry(JSONDeserializable, Dictionaryable):
         if json_string is None:
             return None
         obj = cls.check_json(json_string)
-        id = obj["id"]
+        identifier = obj["id"]
         original_locale = obj["originalLocale"]
         creation_time_seconds = obj["creationTimeSeconds"]
         author_handle = obj["authorHandle"]
@@ -206,7 +203,7 @@ class BlogEntry(JSONDeserializable, Dictionaryable):
         rating = obj["rating"]
         content = obj.get("content")
         return cls(
-            id,
+            identifier,
             original_locale,
             creation_time_seconds,
             author_handle,
@@ -221,7 +218,7 @@ class BlogEntry(JSONDeserializable, Dictionaryable):
 
     def __init__(
         self,
-        id,
+        identifier,
         original_locale,
         creation_time_seconds,
         author_handle,
@@ -233,7 +230,7 @@ class BlogEntry(JSONDeserializable, Dictionaryable):
         rating,
         content=None,
     ):
-        self.id = id
+        self.id = identifier
         self.original_locale = original_locale
         self.creation_time_seconds = creation_time_seconds
         self.author_handle = author_handle
@@ -267,7 +264,7 @@ class Comment(JSONDeserializable, Dictionaryable):
         if json_string is None:
             return None
         obj = cls.check_json(json_string)
-        id = obj["id"]
+        identifier = obj["id"]
         creation_time_seconds = obj["creationTimeSeconds"]
         commentator_handle = obj["commentatorHandle"]
         locale = obj["locale"]
@@ -275,7 +272,7 @@ class Comment(JSONDeserializable, Dictionaryable):
         rating = obj["rating"]
         parent_comment_id = obj.get("parentCommentId")
         return cls(
-            id,
+            identifier,
             creation_time_seconds,
             commentator_handle,
             locale,
@@ -286,7 +283,7 @@ class Comment(JSONDeserializable, Dictionaryable):
 
     def __init__(
         self,
-        id,
+        identifier,
         creation_time_seconds,
         commentator_handle,
         locale,
@@ -294,7 +291,7 @@ class Comment(JSONDeserializable, Dictionaryable):
         rating,
         parent_comment_id=None,
     ):
-        self.id = id
+        self.id = identifier
         self.creation_time_seconds = creation_time_seconds
         self.commentator_handle = commentator_handle
         self.locale = locale
@@ -401,7 +398,7 @@ class Contest(JSONDeserializable, Dictionaryable):
         if json_string is None:
             return None
         obj = cls.check_json(json_string)
-        id = obj["id"]
+        identifier = obj["id"]
         name = obj["name"]
         contest_type = obj["type"]
         phase = obj["phase"]
@@ -419,7 +416,7 @@ class Contest(JSONDeserializable, Dictionaryable):
         city = obj.get("city")
         season = obj.get("season")
         return cls(
-            id,
+            identifier,
             name,
             contest_type,
             phase,
@@ -440,7 +437,7 @@ class Contest(JSONDeserializable, Dictionaryable):
 
     def __init__(
         self,
-        id,
+        identifier,
         name,
         contest_type,
         phase,
@@ -458,7 +455,7 @@ class Contest(JSONDeserializable, Dictionaryable):
         city=None,
         season=None,
     ):
-        self.id = id
+        self.id = identifier
         self.name = name
         self.contest_type = contest_type
         self.phase = phase
@@ -650,7 +647,7 @@ class Submission(JSONDeserializable, Dictionaryable):
         if json_string is None:
             return None
         obj = cls.check_json(json_string)
-        id = obj["id"]
+        identifier = obj["id"]
         creation_time_seconds = obj["creationTimeSeconds"]
         relative_time_seconds = obj["relativeTimeSeconds"]
         problem = Problem.de_json(obj["problem"])
@@ -664,7 +661,7 @@ class Submission(JSONDeserializable, Dictionaryable):
         verdict = obj.get("verdict")
         points = obj.get("points")
         return cls(
-            id,
+            identifier,
             creation_time_seconds,
             relative_time_seconds,
             problem,
@@ -681,7 +678,7 @@ class Submission(JSONDeserializable, Dictionaryable):
 
     def __init__(
         self,
-        id,
+        identifier,
         creation_time_seconds,
         relative_time_seconds,
         problem,
@@ -695,7 +692,7 @@ class Submission(JSONDeserializable, Dictionaryable):
         verdict=None,
         points=None,
     ):
-        self.id = id
+        self.id = identifier
         self.creation_time_seconds = creation_time_seconds
         self.relative_time_seconds = relative_time_seconds
         self.problem = problem
@@ -733,7 +730,7 @@ class Hack(JSONDeserializable, Dictionaryable):
         if json_string is None:
             return None
         obj = cls.check_json(json_string)
-        id = obj["id"]
+        identifier = obj["id"]
         creation_time_seconds = obj["creationTimeSeconds"]
         hacker = Party.de_json(obj["hacker"])
         defender = Party.de_json(obj["defender"])
@@ -742,7 +739,7 @@ class Hack(JSONDeserializable, Dictionaryable):
         test = obj.get("test")
         judge_protocol = obj.get("judgeProtocol")
         return cls(
-            id,
+            identifier,
             creation_time_seconds,
             hacker,
             defender,
@@ -754,7 +751,7 @@ class Hack(JSONDeserializable, Dictionaryable):
 
     def __init__(
         self,
-        id,
+        identifier,
         creation_time_seconds,
         hacker,
         defender,
@@ -763,7 +760,7 @@ class Hack(JSONDeserializable, Dictionaryable):
         test=None,
         judge_protocol=None,
     ):
-        self.id = id
+        self.id = identifier
         self.creation_time_seconds = creation_time_seconds
         self.hacker = hacker
         self.defender = defender
