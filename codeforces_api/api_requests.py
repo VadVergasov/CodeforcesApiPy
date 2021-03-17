@@ -167,9 +167,6 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             handles_str = ""
             for handle in handles:
                 handles_str += str(handle) + ";"
-            request_data = self.generate_request(
-                "user.info", **{"handles": handles_str}
-            )
             parameters["handles"] = handles_str
         if room != -1:
             parameters["room"] = str(room)
@@ -197,7 +194,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        if contest_id == None:
+        if contest_id is None:
             raise TypeError("Contest_id is required")
         parameters = {"contestId": str(contest_id)}
         if handle != "":
