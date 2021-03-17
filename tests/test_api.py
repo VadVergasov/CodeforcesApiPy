@@ -72,8 +72,8 @@ def test_contest_hacks(api_key, api_secret):
 
 def test_contest_list():
     api = CodeforcesApi()
-    list = api.contest_list()
-    for contest in list:
+    contests = api.contest_list()
+    for contest in contests:
         if contest.id == 1496:
             assert contest.name == "Codeforces Round #706 (Div. 2)"
             assert contest.contest_type == "CF"
