@@ -5,7 +5,6 @@ Codeforces API
 [![Issues](https://img.shields.io/github/issues/VadVergasov/CodeforcesApiPy)](https://github.com/VadVergasov/CodeforcesApiPy/issues)
 [![Publish to PyPI and create Release.](https://github.com/VadVergasov/CodeforcesApiPy/actions/workflows/publish.yml/badge.svg?branch=master)](https://github.com/VadVergasov/CodeforcesApiPy/actions/workflows/publish.yml)
 [![Generate wiki](https://github.com/VadVergasov/CodeforcesApiPy/workflows/Generate%20wiki/badge.svg?branch=master)](https://github.com/VadVergasov/CodeforcesApiPy/wiki)
-[![Testing](https://github.com/VadVergasov/CodeforcesApiPy/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/VadVergasov/CodeforcesApiPy/actions/workflows/test.yml)
 [![Downloads](https://static.pepy.tech/personalized-badge/codeforcesapipy?period=total&units=international_system&left_color=black&right_color=blue&left_text=Total%20downloads)](https://pepy.tech/project/codeforcesapipy)
 ![Codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)
 ==========
