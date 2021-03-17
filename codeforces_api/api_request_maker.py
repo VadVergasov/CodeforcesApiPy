@@ -23,9 +23,9 @@ import json
 
 class CodeforcesApiRequestMaker:
 
-    api_key = ""
-    secret = ""
-    rand = 0
+    _api_key = ""
+    _secret = ""
+    _rand = 0
     assigned_rand = False
     anonimus = False
 
@@ -46,10 +46,10 @@ class CodeforcesApiRequestMaker:
         if api_key is None and secret is None:
             self.anonimus = True
         else:
-            self.api_key = api_key
-            self.secret = secret
+            self._api_key = api_key
+            self._secret = secret
             self.anonimus = False
-        self.rand = random_number
+        self._rand = random_number
 
     def generate_request(self, method_name, **fields):
         """
@@ -65,9 +65,9 @@ class CodeforcesApiRequestMaker:
                 self.renew_rand()
 
             current_time = time.time()
-            fields["apiKey"] = str(self.api_key)
+            fields["apiKey"] = str(self._api_key)
             fields["time"] = str(int(current_time))
-            api_signature = str(self.rand) + "/" + method_name + "?"
+            api_signature = str(self._rand) + "/" + method_name + "?"
             fields = collections.OrderedDict(sorted(fields.items()))
             for i in fields:
                 api_signature += str(i) + "="
@@ -78,9 +78,9 @@ class CodeforcesApiRequestMaker:
                     api_signature += str(fields[i])
                 api_signature += "&"
             api_signature = api_signature[:-1]
-            api_signature += "#" + str(self.secret)
+            api_signature += "#" + str(self._secret)
             hashed_signature = hashlib.sha512(api_signature.encode("utf-8"))
-            fields["apiSig"] = str(self.rand) + str(hashed_signature.hexdigest())
+            fields["apiSig"] = str(self._rand) + str(hashed_signature.hexdigest())
         return {"request_url": request_url, "data": fields}
 
     def check_return_code(self, response):

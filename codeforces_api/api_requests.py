@@ -17,7 +17,19 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import requests
 
 from codeforces_api.api_request_maker import CodeforcesApiRequestMaker
-from codeforces_api.types import *
+from codeforces_api.types import (
+    User,
+    BlogEntry,
+    Comment,
+    RecentAction,
+    RatingChange,
+    Contest,
+    Problem,
+    ProblemStatistic,
+    Submission,
+    Hack,
+    RanklistRow,
+)
 
 
 class CodeforcesApi(CodeforcesApiRequestMaker):
@@ -155,9 +167,6 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             handles_str = ""
             for handle in handles:
                 handles_str += str(handle) + ";"
-            request_data = self.generate_request(
-                "user.info", **{"handles": handles_str}
-            )
             parameters["handles"] = handles_str
         if room != -1:
             parameters["room"] = str(room)
@@ -185,7 +194,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        if contest_id == None:
+        if contest_id is None:
             raise TypeError("Contest_id is required")
         parameters = {"contestId": str(contest_id)}
         if handle != "":
