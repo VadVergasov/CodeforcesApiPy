@@ -16,6 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import requests
 from lxml import html
+
 from codeforces_api.api_requests import CodeforcesApi
 
 

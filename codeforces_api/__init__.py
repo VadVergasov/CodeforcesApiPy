@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 __all__ = ["CodeforcesApi", "CodeforcesApiRequestMaker", "CodeforcesParser"]
-from codeforces_api.api_requests import CodeforcesApi
 from codeforces_api.api_request_maker import CodeforcesApiRequestMaker
+from codeforces_api.api_requests import CodeforcesApi
 from codeforces_api.parse_methods import CodeforcesParser
 from codeforces_api.types import *

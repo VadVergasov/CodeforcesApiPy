@@ -18,17 +18,17 @@ import requests
 
 from codeforces_api.api_request_maker import CodeforcesApiRequestMaker
 from codeforces_api.types import (
-    User,
     BlogEntry,
     Comment,
-    RecentAction,
-    RatingChange,
     Contest,
+    Hack,
     Problem,
     ProblemStatistic,
-    Submission,
-    Hack,
     RanklistRow,
+    RatingChange,
+    RecentAction,
+    Submission,
+    User,
 )
 
 
