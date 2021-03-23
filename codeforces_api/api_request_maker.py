@@ -14,11 +14,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import collections
+import hashlib
+import json
 import random
 import time
-import hashlib
-import collections
-import json
 
 
 class CodeforcesApiRequestMaker:
@@ -116,5 +116,6 @@ class CodeforcesApiRequestMaker:
             return response["result"]
         except json.decoder.JSONDecodeError as error:
             raise ValueError(
-                "A lot of users, try to reduce the number of users in the list"
+                "A lot of users, try to reduce the number of users in the list.\nError: %s.\nResponse text: %s"
+                % (str(error), request.text)
             )

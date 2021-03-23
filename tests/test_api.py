@@ -270,54 +270,18 @@ def test_user_friends(api_key, api_secret):
     assert "aropan" in friends or "gepardo" in friends
 
 
-def test_user_info(api_key, api_secret):
+def test_user_info(api_key, api_secret, check_user):
     api = CodeforcesApi(api_key, api_secret)
     info = api.user_info(["VadVergasov", "tourist"])
     for user in info:
-        assert user.email is None or isinstance(user.email, str)
-        assert user.open_id is None or isinstance(user.open_id, str)
-        assert user.first_name is None or isinstance(user.first_name, str)
-        assert user.last_name is None or isinstance(user.last_name, str)
-        assert user.country is None or isinstance(user.country, str)
-        assert user.vk_id is None or isinstance(user.vk_id, str)
-        assert user.country is None or isinstance(user.country, str)
-        assert user.city is None or isinstance(user.city, str)
-        assert user.organization is None or isinstance(user.organization, str)
-        assert isinstance(user.contribution, int)
-        assert user.rank is None or isinstance(user.rank, str)
-        assert user.rating is None or isinstance(user.rating, int)
-        assert user.max_rank is None or isinstance(user.max_rank, str)
-        assert user.max_rating is None or isinstance(user.max_rating, int)
-        assert isinstance(user.last_online, int)
-        assert isinstance(user.registration_time_seconds, int)
-        assert isinstance(user.friend_of_count, int)
-        assert isinstance(user.avatar, str)
-        assert isinstance(user.title_photo, str)
+        check_user(user)
 
 
-def test_user_rated_list():
+def test_user_rated_list(check_user):
     api = CodeforcesApi()
     users = api.user_rated_list(True)
     for user in users:
-        assert user.email is None or isinstance(user.email, str)
-        assert user.open_id is None or isinstance(user.open_id, str)
-        assert user.first_name is None or isinstance(user.first_name, str)
-        assert user.last_name is None or isinstance(user.last_name, str)
-        assert user.country is None or isinstance(user.country, str)
-        assert user.vk_id is None or isinstance(user.vk_id, str)
-        assert user.country is None or isinstance(user.country, str)
-        assert user.city is None or isinstance(user.city, str)
-        assert user.organization is None or isinstance(user.organization, str)
-        assert isinstance(user.contribution, int)
-        assert user.rank is None or isinstance(user.rank, str)
-        assert user.rating is None or isinstance(user.rating, int)
-        assert user.max_rank is None or isinstance(user.max_rank, str)
-        assert user.max_rating is None or isinstance(user.max_rating, int)
-        assert isinstance(user.last_online, int)
-        assert isinstance(user.registration_time_seconds, int)
-        assert isinstance(user.friend_of_count, int)
-        assert isinstance(user.avatar, str)
-        assert isinstance(user.title_photo, str)
+        check_user(user)
 
 
 def test_user_rating():
