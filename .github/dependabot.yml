@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: daily
+    target-branch: develop
+    reviewers:
+      - VadVergasov
+    assignees:
+      - VadVergasov
+    allow:
+      - dependency-type: direct
+      - dependency-type: indirect
+    ignore:
+      - dependency-name: "idna"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: daily
+    target-branch: develop
+    reviewers:
+      - VadVergasov
+    assignees:
+      - VadVergasov
