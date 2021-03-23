@@ -116,6 +116,6 @@ class CodeforcesApiRequestMaker:
             return response["result"]
         except json.decoder.JSONDecodeError as error:
             raise ValueError(
-                "A lot of users, try to reduce the number of users in the list.\n%s"
-                % str(error)
+                "A lot of users, try to reduce the number of users in the list.\nError: %s.\nResponse text: %s"
+                % (str(error), request.text)
             )
