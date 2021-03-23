@@ -19,8 +19,6 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
-      - name: Print Github refs
-        run: echo ${{github.ref}}
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -40,7 +38,7 @@ jobs:
         run: |
           pytest tests/test_api.py --api_key ${{ secrets.codeforces_api_key }} --api_secret ${{ secrets.codeforces_api_secret }}
   publish:
-    if: startsWith(github.ref, 'refs/tags/*')
+    if: startsWith(github.ref, 'refs/tags/')
     needs: test
     name: Build and publish Python 🐍 distributions 📦 to PyPI
     runs-on: ubuntu-latest
@@ -68,7 +66,7 @@ jobs:
         with:
           password: ${{ secrets.pypi_password }}
   release:
-    if: startsWith(github.ref, 'refs/tags/*')
+    if: startsWith(github.ref, 'refs/tags/')
     needs: publish
     name: Create Release
     runs-on: ubuntu-latest
