@@ -23,8 +23,8 @@ import time
 
 class CodeforcesApiRequestMaker:
 
-    _api_key = ""
-    _secret = ""
+    _api_key = None
+    _secret = None
     _rand = 0
     assigned_rand = False
     anonimus = False
@@ -55,11 +55,8 @@ class CodeforcesApiRequestMaker:
         """
         Generates request URL and data for API.
         """
-
         request_url = "https://codeforces.com/api/" + str(method_name)
-
         if not self.anonimus:
-
             # Renew Rand
             if not self.assigned_rand:
                 self.renew_rand()
