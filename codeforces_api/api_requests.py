@@ -50,6 +50,8 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         request = self.session.request(
             self.method, request_data["request_url"], data=request_data["data"]
         )
+        if request.status_code == 502:
+            raise SystemError("Codeforces is unavailable now.")
         return self.get_response(request)
 
     def __init__(self, api_key=None, secret=None, random_number=1000000, method="POST"):
