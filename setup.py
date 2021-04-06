@@ -5,10 +5,10 @@ import re
 
 from setuptools import setup
 
-with open(
-    "codeforces_api/version.py", "r", encoding="utf-8"
-) as f:
-    version = re.search(r"^__version__\s*=\s*\"(.*)\".*$", f.read(), flags=re.MULTILINE).group(1)
+with open("codeforces_api/version.py", "r", encoding="utf-8") as f:
+    version = re.search(
+        r"^__version__\s*=\s*\"(.*)\".*$", f.read(), flags=re.MULTILINE
+    ).group(1)
 
 setup(
     name="CodeforcesApiPy",
