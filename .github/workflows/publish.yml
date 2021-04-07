@@ -14,7 +14,8 @@ on:
 
 jobs:
   test:
-    environment: Testing
+    environment:
+      name: Testing
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,7 +38,7 @@ jobs:
           pip install .
       - name: Test with pytest
         run: |
-          pytest tests/test_api.py --api_key ${{ secrets.codeforces_api_key }} --api_secret ${{ secrets.codeforces_api_secret }} -v
+          pytest tests/test_api.py --api_key ${{ secrets.CODEFORCES_API_KEY }} --api_secret ${{ secrets.CODEFORCES_API_SECRET }} -v
   publish:
     if: startsWith(github.ref, 'refs/tags/')
     needs: test
@@ -64,7 +65,7 @@ jobs:
         run: |
           python setup.py sdist
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@v1
+        uses: pypa/gh-action-pypi-publish@v1.4.2
         with:
           password: ${{ secrets.pypi_password }}
   release:
