@@ -33,7 +33,7 @@ regex==2021.4.4
 requests==2.25.1
 requests-toolbelt==0.9.1
 rfc3986==1.4.0
-six==1.15.0
+six==1.16.0
 toml==0.10.2
 tqdm==4.60.0
 twine==3.4.1
