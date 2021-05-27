@@ -10,7 +10,7 @@ click==8.0.1
 colorama==0.4.4
 docutils==0.17.1
 idna==2.10
-importlib-metadata==4.0.1
+importlib-metadata==4.2.0
 iniconfig==1.1.1
 isort==5.8.0
 keyring==23.0.1
