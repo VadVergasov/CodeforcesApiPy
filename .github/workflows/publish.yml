@@ -14,18 +14,20 @@ on:
 
 jobs:
   test:
+    environment:
+      name: Testing
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v2.2.2
         with:
           python-version: ${{ matrix.python-version }}
       - name: Cache pip
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -36,33 +38,34 @@ jobs:
           pip install .
       - name: Test with pytest
         run: |
-          pytest tests/test_api.py --api_key ${{ secrets.codeforces_api_key }} --api_secret ${{ secrets.codeforces_api_secret }}
+          pytest tests/test_api.py --api_key ${{ secrets.CODEFORCES_API_KEY }} --api_secret ${{ secrets.CODEFORCES_API_SECRET }} -v
   publish:
     if: startsWith(github.ref, 'refs/tags/')
     needs: test
     name: Build and publish Python 🐍 distributions 📦 to PyPI
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2.3.4
       - name: Set up Python 3.9
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2.2.2
         with:
           python-version: 3.9
       - name: Cache pip
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - name: Install twine
-        run: >-
+      - name: Install requirements
+        run: |
+          python -m pip install pip wheel twine --upgrade
           pip install -r requirements.txt
       - name: Build a binary wheel and a source tarball
-        run: >-
+        run: |
           python setup.py sdist
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@v1.4.2
         with:
           password: ${{ secrets.pypi_password }}
   release:
@@ -72,10 +75,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
