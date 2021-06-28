@@ -12,7 +12,7 @@ docutils==0.17.1
 idna==2.10
 importlib-metadata==4.5.0
 iniconfig==1.1.1
-isort==5.8.0
+isort==5.9.1
 keyring==23.0.1
 lazy-object-proxy==1.6.0
 lxml==4.6.3
