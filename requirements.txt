@@ -42,4 +42,4 @@ typing-extensions==3.10.0.0
 urllib3==1.26.6
 webencodings==0.5.1
 wrapt==1.12.1
-zipp==3.4.1
+zipp==3.5.0
