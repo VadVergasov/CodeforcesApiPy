@@ -6,7 +6,7 @@ black==21.7b0
 bleach==3.3.1
 certifi==2021.5.30
 chardet==4.0.0
-charset-normalizer==2.0.3
+charset-normalizer==2.0.4
 click==8.0.1
 colorama==0.4.4
 docutils==0.17.1
