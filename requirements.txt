@@ -40,7 +40,7 @@ tomli==1.2.1
 tqdm==4.62.2
 twine==3.4.2
 typed-ast==1.4.3
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
 urllib3==1.26.6
 webencodings==0.5.1
 wrapt==1.12.1
