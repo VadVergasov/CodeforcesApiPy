@@ -6,7 +6,7 @@ black==21.9b0
 bleach==4.1.0
 certifi==2021.5.30
 chardet==4.0.0
-charset-normalizer==2.0.5
+charset-normalizer==2.0.6
 click==8.0.1
 colorama==0.4.4
 docutils==0.17.1
@@ -41,7 +41,7 @@ tqdm==4.62.2
 twine==3.4.2
 typed-ast==1.4.3
 typing-extensions==3.10.0.2
-urllib3==1.26.6
+urllib3==1.26.7
 webencodings==0.5.1
 wrapt==1.12.1
 zipp==3.5.0
