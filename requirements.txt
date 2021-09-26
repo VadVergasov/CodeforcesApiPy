@@ -30,7 +30,7 @@ pyparsing==2.4.7
 pytest==6.2.5
 pywin32-ctypes==0.2.0
 readme-renderer==29.0
-regex==2021.8.28
+regex==2021.9.24
 requests==2.26.0
 requests-toolbelt==0.9.1
 rfc3986==1.5.0
@@ -41,7 +41,7 @@ tqdm==4.62.2
 twine==3.4.2
 typed-ast==1.4.3
 typing-extensions==3.10.0.2
-urllib3==1.26.6
+urllib3==1.26.7
 webencodings==0.5.1
 wrapt==1.12.1
 zipp==3.5.0
