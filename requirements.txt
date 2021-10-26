@@ -30,13 +30,13 @@ pyparsing==2.4.7
 pytest==6.2.5
 pywin32-ctypes==0.2.0
 readme-renderer==30.0
-regex==2021.9.30
+regex==2021.10.23
 requests==2.26.0
 requests-toolbelt==0.9.1
 rfc3986==1.5.0
 six==1.16.0
 toml==0.10.2
-tomli==1.2.1
+tomli==1.2.2
 tqdm==4.62.3
 twine==3.4.2
 typed-ast==1.4.3
