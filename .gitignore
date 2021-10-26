@@ -10,6 +10,7 @@
 !tests/
 tests/*
 !tests/test_api.py
+!tests/test_api_auth.py
 !tests/conftest.py
 
 !codeforces_api/
