@@ -9,7 +9,7 @@ chardet==4.0.0
 charset-normalizer==2.0.6
 click==8.0.3
 colorama==0.4.4
-docutils==0.17.1
+docutils==0.18
 idna==2.10
 importlib-metadata==4.8.1
 iniconfig==1.1.1
