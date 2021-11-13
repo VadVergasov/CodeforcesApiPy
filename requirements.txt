@@ -16,7 +16,7 @@ iniconfig==1.1.1
 isort==5.10.0
 keyring==23.2.1
 lazy-object-proxy==1.6.0
-lxml==4.6.3
+lxml==4.6.4
 mccabe==0.6.1
 mypy-extensions==0.4.3
 packaging==21.0
