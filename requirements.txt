@@ -6,7 +6,7 @@ black==21.10b0
 bleach==4.1.0
 certifi==2021.10.8
 chardet==4.0.0
-charset-normalizer==2.0.7
+charset-normalizer==2.0.8
 click==8.0.3
 colorama==0.4.4
 docutils==0.18.1
@@ -14,7 +14,7 @@ idna==2.10
 importlib-metadata==4.8.2
 iniconfig==1.1.1
 isort==5.10.1
-keyring==23.2.1
+keyring==23.3.0
 lazy-object-proxy==1.6.0
 lxml==4.6.4
 mccabe==0.6.1
