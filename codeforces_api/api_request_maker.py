@@ -101,6 +101,8 @@ class CodeforcesApiRequestMaker:
             )
 
     def get_response(self, request):
+        if request.status_code != 200:
+            raise Exception("Server returned status code: " + str(request.status_code))
         try:
             response = request.json()
             self.check_return_code(response)

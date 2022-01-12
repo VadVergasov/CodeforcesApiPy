@@ -21,13 +21,13 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.4.0
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v2.3.1
         with:
           python-version: ${{ matrix.python-version }}
       - name: Cache pip
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -38,20 +38,20 @@ jobs:
           pip install .
       - name: Test with pytest
         run: |
-          pytest tests/test_api.py --api_key ${{ secrets.CODEFORCES_API_KEY }} --api_secret ${{ secrets.CODEFORCES_API_SECRET }} -v
+          pytest tests/ --api_key ${{ secrets.CODEFORCES_API_KEY }} --api_secret ${{ secrets.CODEFORCES_API_SECRET }} -v
   publish:
     if: startsWith(github.ref, 'refs/tags/')
     needs: test
     name: Build and publish Python 🐍 distributions 📦 to PyPI
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.4.0
       - name: Set up Python 3.9
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v2.3.1
         with:
           python-version: 3.9
       - name: Cache pip
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -65,7 +65,7 @@ jobs:
         run: |
           python setup.py sdist
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.4.2
+        uses: pypa/gh-action-pypi-publish@v1.5.0
         with:
           password: ${{ secrets.pypi_password }}
   release:
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.4
