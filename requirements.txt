@@ -27,7 +27,7 @@ py==1.11.0
 Pygments==2.11.2
 pylint==2.11.1
 pyparsing==3.0.7
-pytest==6.2.5
+pytest==7.0.0
 pywin32-ctypes==0.2.0
 readme-renderer==30.0
 regex==2022.1.18
@@ -38,7 +38,7 @@ six==1.16.0
 toml==0.10.2
 tomli==1.2.2
 tqdm==4.62.3
-twine==3.7.1
+twine==3.8.0
 typed-ast==1.5.2
 typing-extensions==4.0.1
 urllib3==1.26.8
