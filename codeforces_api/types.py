@@ -91,7 +91,7 @@ class User(JSONDeserializable, Dictionaryable):
         rank = obj.get("rank")
         rating = obj.get("rating")
         max_rank = obj.get("maxRank")
-        max_rating = obj.get("makRating")
+        max_rating = obj.get("maxRating")
         last_online = obj["lastOnlineTimeSeconds"]
         registration_time_seconds = obj["registrationTimeSeconds"]
         friend_of_count = obj["friendOfCount"]
