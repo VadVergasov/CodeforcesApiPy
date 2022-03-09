@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Check code style
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
       - uses: RojerGS/python-black-check@master
         with:
           line-length: "88"
