@@ -27,7 +27,7 @@ platformdirs==2.2.0
 pluggy==1.0.0
 py==1.11.0
 Pygments==2.11.2
-pylint==2.13.1
+pylint==2.13.2
 pyparsing==3.0.7
 pytest==7.1.1
 pywin32-ctypes==0.2.0
