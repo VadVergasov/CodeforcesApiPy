@@ -32,7 +32,7 @@ pylint==2.13.5
 pyparsing==3.0.8
 pytest==7.1.1
 pywin32-ctypes==0.2.0
-readme-renderer==34.0
+readme-renderer==35.0
 regex==2022.3.15
 requests==2.27.1
 requests-toolbelt==0.9.1
