@@ -24,7 +24,7 @@ mypy-extensions==0.4.3
 packaging==21.3
 pathspec==0.9.0
 pkginfo==1.8.2
-platformdirs==2.5.1
+platformdirs==2.5.2
 pluggy==1.0.0
 py==1.11.0
 Pygments==2.11.2
