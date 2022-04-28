@@ -37,7 +37,7 @@ regex==2022.4.24
 requests==2.27.1
 requests-toolbelt==0.9.1
 rfc3986==2.0.0
-rich==12.2.0
+rich==12.3.0
 six==1.16.0
 toml==0.10.2
 tomli==2.0.1
