@@ -47,5 +47,5 @@ typed-ast==1.5.3
 typing_extensions==4.2.0
 urllib3==1.26.9
 webencodings==0.5.1
-wrapt==1.14.0
+wrapt==1.14.1
 zipp==3.8.0
