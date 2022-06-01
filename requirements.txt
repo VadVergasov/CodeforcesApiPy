@@ -13,7 +13,7 @@ commonmark==0.9.1
 dill==0.3.5.1
 docutils==0.18.1
 idna==2.10
-importlib-metadata==4.11.3
+importlib-metadata==4.11.4
 iniconfig==1.1.1
 isort==5.10.1
 keyring==23.3.0
