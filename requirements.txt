@@ -16,7 +16,7 @@ idna==2.10
 importlib-metadata==4.11.4
 iniconfig==1.1.1
 isort==5.10.1
-keyring==23.5.1
+keyring==23.6.0
 lazy-object-proxy==1.7.1
 lxml==4.9.0
 mccabe==0.6.1
