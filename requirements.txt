@@ -1,6 +1,6 @@
 appdirs==1.4.4
 astroid==2.11.6
-atomicwrites==1.4.0
+atomicwrites==1.4.1
 attrs==21.4.0
 black==22.6.0
 bleach==5.0.1
