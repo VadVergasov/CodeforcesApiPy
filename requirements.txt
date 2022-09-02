@@ -2,7 +2,7 @@ appdirs==1.4.4
 astroid==2.12.5
 atomicwrites==1.4.1
 attrs==22.1.0
-black==22.6.0
+black==22.8.0
 bleach==5.0.1
 certifi==2022.6.15
 chardet==5.0.0
