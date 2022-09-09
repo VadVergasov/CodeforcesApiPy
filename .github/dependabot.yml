@@ -12,8 +12,6 @@ updates:
     allow:
       - dependency-type: direct
       - dependency-type: indirect
-    ignore:
-      - dependency-name: "idna"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

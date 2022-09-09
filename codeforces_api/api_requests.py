@@ -67,7 +67,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
     def blog_entry_comments(self, blog_entry_id):
         """
-        Get blogEntry.commnets for blog, blog_entry_id required.
+        Get blogEntry.comments for blog, blog_entry_id required.
 
         Returns parsed response from codeforces.com.
         """
@@ -309,7 +309,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        if self.anonimus:
+        if self.anonymous:
             raise TypeError("Auth is required.")
         return self._make_request(
             "user.friends", **{"onlyOnline": str(only_online).lower()}

@@ -37,7 +37,7 @@ class CodeforcesParser:
 
         contest_id is the id of contest.
 
-        submit_id is the id of sumbission.
+        submit_id is the id of submission.
         """
         solutionPage = self.session.get(
             "https://codeforces.com/contest/"
@@ -55,7 +55,7 @@ class CodeforcesParser:
 
     def get_tags(self, contest_id, index, include_rating=False):
         """
-        Get tags of the given problem.
+        Get tags in lexicographical order of the given problem.
 
         contest_id is the number of the contest.
 
@@ -63,6 +63,7 @@ class CodeforcesParser:
 
         include_rating is bool which indicates include or not task rating.
         """
+        # If we don't have tags we should get them.
         if self.problem_tags == dict():
             cf_api = CodeforcesApi()
             for problem in cf_api.problemset_problems()["problems"]:
@@ -71,13 +72,13 @@ class CodeforcesParser:
                 self.problem_tags[str(problem.contest_id)][
                     str(problem.index)
                 ] = problem.tags
-                if include_rating:
-                    try:
-                        self.problem_tags[str(problem.problem_id)][
-                            str(problem.index)
-                        ].append("*" + str(problem.rating))
-                    except KeyError:
-                        pass
+                try:
+                    self.problem_tags[str(problem.contest_id)][
+                        str(problem.index)
+                    ].append("*" + str(problem.rating))
+                except KeyError:
+                    pass
+                self.problem_tags[str(problem.contest_id)][str(problem.index)].sort()
         if isinstance(index, int):
             index = chr(ord("A") + index)
         elif isinstance(index, str):
@@ -85,6 +86,11 @@ class CodeforcesParser:
                 index = chr(ord("A") + int(index))
             index = index.capitalize()
         try:
-            return self.problem_tags[str(contest_id)][index]
+            if include_rating:
+                return self.problem_tags[str(contest_id)][index]
+            return self.problem_tags[str(contest_id)][index][1:]
         except KeyError:
-            return self.problem_tags[str(int(contest_id) - 1)][index]
+            # If problem included in more than one division.
+            if include_rating:
+                return self.problem_tags[str(int(contest_id) - 1)][index]
+            return self.problem_tags[str(int(contest_id) - 1)][index][1:]
