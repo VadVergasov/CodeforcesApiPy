@@ -92,11 +92,6 @@ class CodeforcesParser:
                 index = chr(ord("A") + int(index))
             index = index.capitalize()
         try:
-            if include_rating:
-                return self.problem_tags[str(contest_id)][index]
-            return self.problem_tags[str(contest_id)][index][1:]
+            return sorted(self.problem_tags[str(contest_id)][index])
         except KeyError:
-            # If problem included in more than one division.
-            if include_rating:
-                return self.problem_tags[str(int(contest_id) - 1)][index]
-            return self.problem_tags[str(int(contest_id) - 1)][index][1:]
+            return sorted(self.problem_tags[str(int(contest_id) - 1)][index])
