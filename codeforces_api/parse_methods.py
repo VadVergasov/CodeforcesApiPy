@@ -37,7 +37,7 @@ class CodeforcesParser:
 
         contest_id is the id of contest.
 
-        submit_id is the id of sumbission.
+        submit_id is the id of submission.
         """
         solutionPage = self.session.get(
             "https://codeforces.com/contest/"
