@@ -309,7 +309,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
 
         Returns parsed response from codeforces.com.
         """
-        if self.anonimus:
+        if self.anonymous:
             raise TypeError("Auth is required.")
         return self._make_request(
             "user.friends", **{"onlyOnline": str(only_online).lower()}

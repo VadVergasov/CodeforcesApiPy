@@ -29,7 +29,7 @@ class CodeforcesApiRequestMaker:
     _secret = None
     _rand = 0
     assigned_rand = False
-    anonimus = False
+    anonymous = False
 
     def __init__(self, api_key=None, secret=None, random_number=1000000):
         """
@@ -46,11 +46,11 @@ class CodeforcesApiRequestMaker:
                 random_number,
             )
         if api_key is None and secret is None:
-            self.anonimus = True
+            self.anonymous = True
         else:
             self._api_key = api_key
             self._secret = secret
-            self.anonimus = False
+            self.anonymous = False
         self._rand = random_number
 
     def generate_request(self, method_name, **fields):
@@ -58,7 +58,7 @@ class CodeforcesApiRequestMaker:
         Generates request URL and data for API.
         """
         request_url = "https://codeforces.com/api/" + str(method_name)
-        if not self.anonimus:
+        if not self.anonymous:
             # Renew Rand
             if not self.assigned_rand:
                 self.renew_rand()
