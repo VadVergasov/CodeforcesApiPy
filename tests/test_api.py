@@ -5,16 +5,16 @@ from codeforces_api.types import BlogEntry, Comment, Party, Problem
 from codeforces_api import CodeforcesApi
 
 
-def test_blog_entry_comments(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_blog_entry_comments():
+    api = CodeforcesApi()
     comments = api.blog_entry_comments(74291)
     for comment in comments:
         if comment.id == 584151:
             assert comment.creation_time_seconds == 1582795345
 
 
-def test_blog_entry_view(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_blog_entry_view():
+    api = CodeforcesApi()
     blog_entry = api.blog_entry_view(74291)
     assert blog_entry.author_handle == "VadVergasov"
     assert blog_entry.original_locale == "ru"
@@ -32,8 +32,8 @@ def test_blog_entry_view(api_key, api_secret):
     assert blog_entry.content is None
 
 
-def test_contest_hacks(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_contest_hacks():
+    api = CodeforcesApi()
     hacks = api.contest_hacks(1311)
     for hack in hacks:
         if hack.id == 615666:
@@ -93,8 +93,8 @@ def test_contest_list():
             break
 
 
-def test_contest_rating_changes(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_contest_rating_changes():
+    api = CodeforcesApi()
     changes = api.contest_rating_changes(1313)
     for change in changes:
         if change.handle == "VadVergasov":
@@ -107,8 +107,8 @@ def test_contest_rating_changes(api_key, api_secret):
             break
 
 
-def test_contest_standings(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_contest_standings():
+    api = CodeforcesApi()
     standings = api.contest_standings(1313, handles=["VadVergasov"])
     assert standings["contest"].id == 1313
     assert standings["contest"].name == "Codeforces Round #622 (Div. 2)"
@@ -197,8 +197,8 @@ def test_contest_status():
             assert row.points is None
 
 
-def test_problemset_problems(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_problemset_problems():
+    api = CodeforcesApi()
     problemset = api.problemset_problems()
     for problem in problemset["problems"]:
         if problem.name == "Single Push":
@@ -215,8 +215,8 @@ def test_problemset_problems(api_key, api_secret):
         assert isinstance(statistic.contest_id, int)
 
 
-def test_recent_status(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_recent_status():
+    api = CodeforcesApi()
     status = api.problemset_recent_status(1)[0]
     assert isinstance(status.id, int)
     assert isinstance(status.creation_time_seconds, int)
@@ -233,8 +233,8 @@ def test_recent_status(api_key, api_secret):
     assert status.points is None or isinstance(status.points, float)
 
 
-def test_recent_actions(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_recent_actions():
+    api = CodeforcesApi()
     action = api.recent_actions()[0]
     assert isinstance(action.time_seconds, int)
     if hasattr(action, "blog_entry"):
@@ -243,8 +243,8 @@ def test_recent_actions(api_key, api_secret):
         assert isinstance(action.comment, Comment)
 
 
-def test_user_blog_entries(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
+def test_user_blog_entries():
+    api = CodeforcesApi()
     entries = api.user_blog_entries("VadVergasov")
     for entry in entries:
         if entry.id == 74291:
@@ -264,14 +264,8 @@ def test_user_blog_entries(api_key, api_secret):
             assert entry.content is None
 
 
-def test_user_friends(api_key, api_secret):
-    api = CodeforcesApi(api_key, api_secret)
-    friends = api.user_friends()
-    assert "aropan" in friends or "gepardo" in friends
-
-
-def test_user_info(api_key, api_secret, check_user):
-    api = CodeforcesApi(api_key, api_secret)
+def test_user_info(check_user):
+    api = CodeforcesApi()
     info = api.user_info(["VadVergasov", "tourist"])
     for user in info:
         check_user(user)
