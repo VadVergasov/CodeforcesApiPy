@@ -55,7 +55,7 @@ class CodeforcesParser:
 
     def get_tags(self, contest_id, index, include_rating=False):
         """
-        Get tags of the given problem.
+        Get tags in lexicographical order of the given problem.
 
         contest_id is the number of the contest.
 
@@ -85,6 +85,6 @@ class CodeforcesParser:
                 index = chr(ord("A") + int(index))
             index = index.capitalize()
         try:
-            return self.problem_tags[str(contest_id)][index]
+            return sorted(self.problem_tags[str(contest_id)][index])
         except KeyError:
-            return self.problem_tags[str(int(contest_id) - 1)][index]
+            return sorted(self.problem_tags[str(int(contest_id) - 1)][index])
