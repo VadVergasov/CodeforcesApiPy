@@ -8,25 +8,35 @@ def pytest_addoption(parser):
     parser.addoption(
         "--api_key",
         action="store",
-        default="api_key",
+        default="",
         help="API key for tests",
     )
     parser.addoption(
         "--api_secret",
         action="store",
-        default="api_secret",
+        default="",
         help="API secret for tests",
     )
 
 
 @pytest.fixture
 def api_key(request):
-    return request.config.getoption("--api_key")
+    try:
+        import conf
+
+        return conf.api_key
+    except FileNotFoundError:
+        return request.config.getoption("--api_key")
 
 
 @pytest.fixture
 def api_secret(request):
-    return request.config.getoption("--api_secret")
+    try:
+        import conf
+
+        return conf.api_secret
+    except FileNotFoundError:
+        return request.config.getoption("--api_secret")
 
 
 @pytest.fixture
