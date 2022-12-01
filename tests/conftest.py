@@ -21,12 +21,22 @@ def pytest_addoption(parser):
 
 @pytest.fixture
 def api_key(request):
-    return request.config.getoption("--api_key")
+    try:
+        import conf
+
+        return conf.api_key
+    except FileNotFoundError:
+        return request.config.getoption("--api_key")
 
 
 @pytest.fixture
 def api_secret(request):
-    return request.config.getoption("--api_secret")
+    try:
+        import conf
+
+        return conf.api_secret
+    except FileNotFoundError:
+        return request.config.getoption("--api_secret")
 
 
 @pytest.fixture
