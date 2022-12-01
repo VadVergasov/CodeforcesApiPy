@@ -25,7 +25,7 @@ def api_key(request):
         import conf
 
         return conf.api_key
-    except FileNotFoundError:
+    except ModuleNotFoundError:
         return request.config.getoption("--api_key")
 
 
@@ -35,7 +35,7 @@ def api_secret(request):
         import conf
 
         return conf.api_secret
-    except FileNotFoundError:
+    except ModuleNotFoundError:
         return request.config.getoption("--api_secret")
 
 
