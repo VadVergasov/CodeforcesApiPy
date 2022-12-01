@@ -8,13 +8,13 @@ def pytest_addoption(parser):
     parser.addoption(
         "--api_key",
         action="store",
-        default="api_key",
+        default="",
         help="API key for tests",
     )
     parser.addoption(
         "--api_secret",
         action="store",
-        default="api_secret",
+        default="",
         help="API secret for tests",
     )
 
