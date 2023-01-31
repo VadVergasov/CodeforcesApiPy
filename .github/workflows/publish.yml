@@ -21,6 +21,13 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9, "3.10", "3.11"]
         os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            path: ~/.cache/pip
+          - os: macos-latest
+            path: ~/Library/Caches/pip
+          - os: windows-latest
+            path: ~\AppData\Local\pip\Cache
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -31,7 +38,7 @@ jobs:
       - name: Cache pip
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
+          path: ${{ matrix.path }}
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
       - name: Update pip, wheel and setuptools
         run: |
@@ -57,7 +64,7 @@ jobs:
       - name: Cache pip
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
+          path: ${{ matrix.path }}
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
