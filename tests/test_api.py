@@ -1,6 +1,7 @@
 """
 Testing requests to api.
 """
+
 from codeforces_api.types import BlogEntry, Comment, Party, Problem
 from codeforces_api import CodeforcesApi
 
@@ -75,7 +76,7 @@ def test_contest_list():
     contests = api.contest_list()
     for contest in contests:
         if contest.id == 1496:
-            assert contest.name == "Codeforces Round #706 (Div. 2)"
+            assert contest.name == "Codeforces Round 706 (Div. 2)"
             assert contest.contest_type == "CF"
             assert contest.phase == "FINISHED"
             assert not contest.frozen
@@ -99,7 +100,7 @@ def test_contest_rating_changes():
     for change in changes:
         if change.handle == "VadVergasov":
             assert change.contest_id == 1313
-            assert change.contest_name == "Codeforces Round #622 (Div. 2)"
+            assert change.contest_name == "Codeforces Round 622 (Div. 2)"
             assert change.rank == 2303
             assert change.rating_update_time_seconds == 1582455900
             assert change.old_rating == 1330
@@ -111,7 +112,7 @@ def test_contest_standings():
     api = CodeforcesApi()
     standings = api.contest_standings(1313, handles=["VadVergasov"])
     assert standings["contest"].id == 1313
-    assert standings["contest"].name == "Codeforces Round #622 (Div. 2)"
+    assert standings["contest"].name == "Codeforces Round 622 (Div. 2)"
     assert standings["contest"].contest_type == "CF"
     assert standings["contest"].phase == "FINISHED"
     assert not standings["contest"].frozen
@@ -187,7 +188,7 @@ def test_contest_status():
             assert row.author.contest_id == 1313
             assert row.author.room == 10
             assert row.author.start_time_seconds == 1582448700
-            assert row.programming_language == "GNU C++17"
+            assert row.programming_language == "C++17 (GCC 7-32)"
             assert row.testset == "TESTS"
             assert row.passed_test_count == 5
             assert row.time_consumed_millis == 171

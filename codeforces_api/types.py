@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Source of inspiration: https://github.com/eternnoir/pyTelegramBotAPI/blob/master/telebot/types.py
 """
+
 import json
 
 

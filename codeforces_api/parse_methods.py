@@ -14,6 +14,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+
 import requests
 from lxml import html
 
@@ -43,7 +44,12 @@ class CodeforcesParser:
             "https://codeforces.com/contest/"
             + str(contest_id)
             + "/submission/"
-            + str(submit_id)
+            + str(submit_id),
+            cookies={
+                "RCPC": "333e1cab3b9ab19c225e45305669bef8",
+                "expires": "Thu, 31-Dec-37 23:55:55 GMT",
+                "path": "/",
+            },
         )
         if int(solutionPage.status_code) != 200:
             raise Exception("Returned not OK code " + str(solutionPage))
