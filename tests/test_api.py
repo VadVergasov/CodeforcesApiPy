@@ -188,7 +188,7 @@ def test_contest_status():
             assert row.author.contest_id == 1313
             assert row.author.room == 10
             assert row.author.start_time_seconds == 1582448700
-            assert row.programming_language == "GNU C++17"
+            assert row.programming_language == "C++17 (GCC 7-32)"
             assert row.testset == "TESTS"
             assert row.passed_test_count == 5
             assert row.time_consumed_millis == 171
