@@ -29,7 +29,6 @@ pathspec==0.10.2
 pkginfo==1.8.3
 platformdirs==2.5.4
 pluggy==1.0.0
-py==1.11.0
 Pygments==2.15.0
 pylint==2.15.7
 pyparsing==3.0.9
