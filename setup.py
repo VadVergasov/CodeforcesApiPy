@@ -30,5 +30,5 @@ setup(
     ],
     keywords="codeforces api python",
     install_requires=["requests", "lxml"],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
 )
