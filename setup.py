@@ -1,6 +1,7 @@
 """
 Install script for CodeforcesApiPy module
 """
+
 import re
 
 from setuptools import setup
