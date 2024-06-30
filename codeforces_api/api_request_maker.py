@@ -20,7 +20,7 @@ import json
 import random
 import time
 
-import requests
+import urllib
 
 
 class CodeforcesApiRequestMaker:
@@ -68,7 +68,7 @@ class CodeforcesApiRequestMaker:
             fields["time"] = str(int(current_time))
             api_signature = str(self._rand) + "/" + method_name + "?"
             fields = collections.OrderedDict(sorted(fields.items()))
-            api_signature += requests.urllib3.request.urlencode(fields, safe=";")
+            api_signature += urllib.parse.urlencode(fields, safe=";")
             api_signature += "#" + str(self._secret)
             hashed_signature = hashlib.sha512(api_signature.encode("utf-8"))
             fields["apiSig"] = str(self._rand) + str(hashed_signature.hexdigest())
