@@ -1,6 +1,7 @@
 """
 Testing requests to api.
 """
+
 from codeforces_api.types import BlogEntry, Comment, Party, Problem
 from codeforces_api import CodeforcesApi
 

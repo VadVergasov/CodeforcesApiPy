@@ -1,6 +1,7 @@
 """
 Testing parse methods
 """
+
 from codeforces_api import CodeforcesParser
 
 
