@@ -2,7 +2,7 @@ appdirs==1.4.4
 astroid==2.12.13
 atomicwrites==1.4.1
 attrs==22.1.0
-black==24.2.0
+black==24.4.2
 bleach==5.0.1
 certifi==2024.6.2
 chardet==5.0.0
@@ -37,7 +37,7 @@ pytest==7.2.0
 pywin32-ctypes==0.2.0
 readme-renderer==37.3
 regex==2022.10.31
-requests==2.31.0
+requests==2.32.3
 requests-toolbelt==0.10.1
 rfc3986==2.0.0
 rich==12.6.0
@@ -45,7 +45,7 @@ six==1.16.0
 toml==0.10.2
 tomli==2.0.1
 tomlkit==0.11.6
-tqdm==4.64.1
+tqdm==4.66.4
 twine==4.0.1
 typed_ast==1.5.4
 typing_extensions==4.4.0
