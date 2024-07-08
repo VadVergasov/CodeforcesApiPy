@@ -37,7 +37,7 @@ pywin32-ctypes==0.2.0
 readme-renderer==37.3
 regex==2022.10.31
 requests==2.32.3
-requests-toolbelt==0.10.1
+requests-toolbelt==1.0.0
 rfc3986==2.0.0
 rich==12.6.0
 six==1.16.0
