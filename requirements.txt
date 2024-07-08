@@ -16,7 +16,7 @@ exceptiongroup==1.0.4
 idna==3.4
 importlib-metadata==8.0.0
 iniconfig==1.1.1
-isort==5.10.1
+isort==5.13.2
 jaraco.classes==3.4.0
 keyring==23.11.0
 lazy-object-proxy==1.10.0
