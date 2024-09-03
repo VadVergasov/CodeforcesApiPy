@@ -76,7 +76,7 @@ jobs:
         run: |
           python3 -m build
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.9.0
+        uses: pypa/gh-action-pypi-publish@v1.10.1
         with:
           password: ${{ secrets.pypi_password }}
   release:
