@@ -366,7 +366,7 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             )
         ]
 
-    def user_status(self, handle, start=-1, count=-1):
+    def user_status(self, handle, start=-1, count=-1, include_sources=False):
         """
         Get user.status.
 
@@ -375,6 +375,8 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
         From was replaced with a start because from is reserved python word.
 
         count is the number of attempts to return.
+
+        include_sources is used to include sources in the response, must be your own handle.
 
         Returns parsed response from codeforces.com.
         """
@@ -385,6 +387,8 @@ class CodeforcesApi(CodeforcesApiRequestMaker):
             parameters["from"] = str(start)
         if count != -1:
             parameters["count"] = str(count)
+        if include_sources:
+            parameters["includeSources"] = "true"
         return [
             Submission.de_json(submission)
             for submission in self._make_request("user.status", **parameters)

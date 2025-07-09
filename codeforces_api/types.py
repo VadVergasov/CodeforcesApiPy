@@ -17,7 +17,7 @@ Source of inspiration: https://github.com/eternnoir/pyTelegramBotAPI/blob/master
 """
 
 import json
-
+import base64
 
 class Dictionaryable(object):
     """
@@ -661,6 +661,7 @@ class Submission(JSONDeserializable, Dictionaryable):
         contest_id = obj.get("contestId")
         verdict = obj.get("verdict")
         points = obj.get("points")
+        source_code = obj.get("sourceBase64")
         return cls(
             identifier,
             creation_time_seconds,
@@ -675,6 +676,7 @@ class Submission(JSONDeserializable, Dictionaryable):
             contest_id,
             verdict,
             points,
+            base64.b64decode(source_code).decode() if source_code else None,
         )
 
     def __init__(
@@ -692,6 +694,7 @@ class Submission(JSONDeserializable, Dictionaryable):
         contest_id=None,
         verdict=None,
         points=None,
+        source_code=None,
     ):
         self.id = identifier
         self.creation_time_seconds = creation_time_seconds
@@ -706,6 +709,7 @@ class Submission(JSONDeserializable, Dictionaryable):
         self.contest_id = contest_id
         self.verdict = verdict
         self.points = points
+        self.source_code = source_code
 
     def to_dict(self):
         return {
@@ -722,6 +726,7 @@ class Submission(JSONDeserializable, Dictionaryable):
             "contest_id": self.contest_id,
             "verdict": self.verdict,
             "points": self.points,
+            "source_code": self.source_code
         }
 
 
